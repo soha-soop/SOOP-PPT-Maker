@@ -1,0 +1,3953 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데뷔 프레젠테이션 템플릿</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Square+Round&display=swap');
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal; font-style: normal;
+}
+@font-face {
+    font-family: 'PartialSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSans.woff2') format('woff2');
+    font-weight: normal; font-style: normal;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --pk:#e8729a;--pk-l:#fff0f5;--pk-m:#ffd6e7;--pk-s:#fff5f9;
+  --pk-a:#ff9ec4;--pk-d:#d4568a;--pk-dd:#b8407a;
+  --td:#4a2040;--tm:#6b3a5a;--tl:#c48aa8;--dot:#ffe0ec;
+  --paper:#fefbf3;--paper-border:#f5e6d0;
+  /* RGB 채널 (rgba()용, 테마 변경 시 JS가 자동 갱신) */
+  --pk-rgb:232, 114, 154;
+  --pk-d-rgb:212, 86, 138;
+  --pk-dd-rgb:184, 64, 122;
+  --pk-m-rgb:255, 214, 231;
+  --pk-a-rgb:255, 158, 196;
+  --pk-l-rgb:255, 240, 245;
+  --pk-s-rgb:255, 245, 249;
+  /* 레이아웃 변수 (편집 패널에서 조정 가능) */
+  --content-split-gap: 60px;   /* 5페이지 좌/우 컬럼 사이 간격 */
+  --content-col-gap: 22px;     /* 5페이지 각 컬럼 내부 요소 간격 */
+  --content-cl-padding-x: 30px;/* 5페이지 좌우 내부 패딩 */
+  --content-cl-padding-y: 40px;/* 5페이지 상하 내부 패딩 */
+  --sched-row-padding-y: 16px; /* 방송 시간 행 세로 여백 */
+  --weekday-gap: 8px;          /* 요일 셀 사이 간격 */
+  --content-header-mb: 20px;   /* 5페이지 제목과 콘텐츠 사이 간격 */
+  --goals-header-mb: 20px;     /* 6페이지 제목과 체크리스트 사이 간격 */
+  --card-page-gap: 40px;       /* 3/4페이지 좌/우 섹션 간격 */
+  --card-page-padding: 60px;   /* 3/4페이지 내부 패딩 */
+  --cover-title-letter-spacing: 8px; /* 표지 타이틀 자간 */
+  --cover-tag-mb: 12px;        /* 표지 태그와 타이틀 사이 간격 */
+  --cover-sub-mt: 8px;         /* 표지 타이틀과 서브타이틀 사이 간격 */
+  --profile-row-padding-y: 18px; /* 프로필 각 행 세로 패딩 */
+  --ckl-gap: 16px;             /* 체크리스트 항목 사이 간격 */
+  --cki-padding-y: 18px;       /* 체크리스트 항목 세로 패딩 */
+  --thanks-letter-spacing: 5px; /* 마무리 메인 텍스트 자간 */
+  /* 대지(.paper)와 콘텐츠의 좌측 쏠림 */
+  --paper-left-pull: 0px;      /* 0 ~ 400px, 중심을 이 값만큼 왼쪽으로 */
+  --paper-width-shrink: 0px;   /* 0 ~ 400px, 너비를 이 값만큼 줄임 */
+}
+body{font-family:'NanumSquareRound','Apple SD Gothic Neo',sans-serif;background:#1a1018;overflow:hidden;height:100vh;width:100vw;}
+.pres{width:100vw;height:100vh;position:relative;}
+
+/* --- 5. 전체 배경 그라데이션 --- */
+.sl{position:absolute;top:0;left:0;width:100%;height:100%;
+    background:linear-gradient(135deg, #ffffff 0%, var(--pk-m) 100%);
+    overflow:hidden;opacity:0;pointer-events:none;z-index:0;}
+.sl.act{opacity:1;pointer-events:auto;z-index:10;animation:sIn .4s ease;}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+.sl::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle,var(--dot) 1px,transparent 1px);background-size:24px 24px;opacity:.15;pointer-events:none;z-index:0;}
+
+/* Frame */
+.frame{position:absolute;top:14px;left:14px;right:14px;bottom:56px;border:3px solid var(--pk-m);border-radius:18px;z-index:1;pointer-events:none;}
+.frame::before{content:'';position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:1.5px solid rgba(255,214,231,.45);border-radius:14px;}
+.corner{position:absolute;font-size:18px;z-index:2;pointer-events:none;}
+.corner.tl{top:5px;left:8px;}.corner.tr{top:5px;right:8px;}.corner.bl{bottom:5px;left:8px;}.corner.br{bottom:5px;right:8px;}
+.ribbon{position:absolute;top:-1px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;}
+.ribbon-inner{background:linear-gradient(135deg,var(--pk),var(--pk-a));color:#fff;font-size:12px;font-weight:700;padding:6px 24px 8px;border-radius:0 0 12px 12px;letter-spacing:3px;box-shadow:0 3px 10px rgba(232,114,154,.2);}
+
+/* --- 2 & 3. 대지(Paper) 규격 확장 및 중앙 밸런스 고정 --- */
+.paper{
+  position:absolute;
+  width: 82%; 
+  max-width: 1100px;
+  height: 82%;
+  top: 50%; left: calc(50% - var(--paper-left-pull));
+  transform: translate(-50%, -50%);
+  background:var(--paper);
+  border-radius:16px;
+  border:1.5px solid var(--paper-border);
+  z-index:1;
+  box-shadow:0 4px 20px rgba(200,170,130,.15),inset 0 0 30px rgba(255,250,240,.5);
+}
+.paper::before {
+  content: '';
+  position: absolute;
+  top: -15px; left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 140px; height: 35px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Nav */
+.nb{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);padding:7px 16px;border-radius:22px;border:2px solid var(--pk-m);box-shadow:0 4px 16px rgba(255,150,180,.18);}
+.nd{width:10px;height:10px;border-radius:50%;background:var(--pk-m);cursor:pointer;transition:all .3s;border:none;}
+.nd.act{background:var(--pk);transform:scale(1.3);}
+.nd:hover{background:var(--pk-a);}
+.na{position:fixed;top:50%;transform:translateY(-50%);z-index:100;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.82);backdrop-filter:blur(8px);border:2px solid var(--pk-m);color:var(--pk-d);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.na:hover{background:var(--pk-m);transform:translateY(-50%) scale(1.1);}
+.np{left:18px;}.nn{right:18px;}
+.pn{position:fixed;top:18px;right:26px;z-index:100;font-size:11px;color:var(--tl);font-weight:500;letter-spacing:2px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);padding:4px 12px;border-radius:14px;border:1.5px solid var(--pk-m);}
+
+/* Deco */
+.stk{position:absolute;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.05));}
+.sticker { position: absolute; filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.15)); z-index: 20; }
+.petal{position:absolute;font-size:16px;opacity:.3;animation:pF 5s ease-in-out infinite;z-index:0;}
+@keyframes pF{0%,100%{transform:translateY(0) rotate(0deg);opacity:.3}50%{transform:translateY(-10px) rotate(12deg);opacity:.5}}
+.deco-blob{position:absolute;pointer-events:none;z-index:0;opacity:.1;}
+
+/* --- 4. 콘텐츠 영역을 대지(Paper) 규격에 강제 종속 (HTML 수정 불필요) --- */
+.lr, .cl, .card-page {
+  position: absolute;
+  width: 82%; 
+  max-width: 1100px;
+  height: 82%;
+  top: 50%; left: calc(50% - var(--paper-left-pull));
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-sizing: border-box;
+}
+.lr { display: flex; align-items: stretch; padding: 30px 10px; }
+.cc { width: 42%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; overflow: hidden; }
+.cc img{
+  height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(212,86,138,.1));
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+.tc { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 4% 0 2%; position: relative; z-index: 2; }
+.cl { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
+.card-page { display: flex; align-items: center; justify-content: center; gap: 32px; padding: 50px; }
+
+/* --- 5. 폰트 크기 전체 상향 및 규격화 --- */
+.tag{display:inline-block;background:linear-gradient(135deg,var(--pk),var(--pk-a));color:#fff;font-size:12px;font-weight:700;padding:6px 20px;border-radius:16px;letter-spacing:3px;margin-bottom:var(--cover-tag-mb);width:fit-content;box-shadow:0 3px 10px rgba(232,114,154,.2);}
+.deco-line{width:60px;height:4px;background:linear-gradient(90deg,var(--pk),transparent);border-radius:2px;margin:12px 0;}
+.sub-grad{font-size:clamp(16px, 1.8vw, 20px);color:var(--tl);font-weight:400;letter-spacing:2px;line-height:1.8;}
+.sub-grad strong{background:linear-gradient(90deg,var(--pk),var(--pk-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800;}
+.slbl{font-size:13px;color:var(--tl);letter-spacing:4px;font-weight:700;margin-bottom:6px;}
+.sh{
+  font-family: 'PartialSans', 'GmarketSansMedium', sans-serif;
+  font-size:clamp(34px, 4vw, 48px);font-weight:normal;letter-spacing:3px;margin-bottom:20px;
+  background:linear-gradient(135deg,var(--pk-d),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(2px 2px 0 var(--pk-m));
+}
+
+/* ===== 1. COVER SPECIAL (파셜산스 + 2단 획) ===== */
+.cover-bg{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;z-index:0;}
+.cover-bg .stripe{position:absolute;height:200%;width:120px;background:linear-gradient(180deg,rgba(var(--pk-m-rgb),.22),rgba(var(--pk-a-rgb),.12),rgba(var(--pk-m-rgb),.22));transform:rotate(-25deg);animation:stripeMove 8s linear infinite;}
+@keyframes stripeMove{0%{transform:rotate(-25deg) translateY(-20%)}100%{transform:rotate(-25deg) translateY(20%)}}
+.cover-sparkle{position:absolute;width:6px;height:6px;background:#fff;border-radius:50%;animation:sparkPop 2s ease-in-out infinite;box-shadow:0 0 6px 2px rgba(var(--pk-m-rgb),.9);}
+@keyframes sparkPop{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+.cover-ring{position:absolute;border:2px solid rgba(var(--pk-m-rgb),.35);border-radius:50%;animation:ringPulse 4s ease-in-out infinite;}
+@keyframes ringPulse{0%,100%{transform:scale(.8);opacity:.15}50%{transform:scale(1.1);opacity:.3}}
+
+.cover-title{
+  font-family: 'PartialSans', sans-serif;
+  font-size:clamp(70px, 9vw, 120px);font-weight:normal;letter-spacing:var(--cover-title-letter-spacing);line-height:1.1;
+  background:linear-gradient(135deg,#fff,var(--pk-l),var(--pk-m),#fff);background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shineText 3s ease-in-out infinite;
+  /* 안쪽 흰색 획 + 바깥 분홍색 그림자 세팅 */
+  -webkit-text-stroke: 3px #ffffff;
+  filter: drop-shadow(3px 3px 0 var(--pk-d)) drop-shadow(-3px -3px 0 var(--pk-d)) 
+          drop-shadow(3px -3px 0 var(--pk-d)) drop-shadow(-3px 3px 0 var(--pk-d))
+          drop-shadow(0 0 15px rgba(var(--pk-rgb),.4));
+}
+@keyframes shineText{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.cover-sub-title{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size:clamp(20px,2.5vw,32px);font-weight:700;letter-spacing:4px;
+  color:var(--pk-d);margin-top:var(--cover-sub-mt);
+  text-shadow:1px 1px 0 var(--pk-m);
+}
+.cover-date{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.75);backdrop-filter:blur(8px);
+  border:2px solid var(--pk-m);border-radius:20px;
+  padding:10px 28px;margin-top:18px;
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size:16px;font-weight:700;color:var(--pk-d);letter-spacing:2px;
+  box-shadow:0 4px 16px rgba(255,150,180,.15);
+}
+.cover-float{animation:coverFloat 3s ease-in-out infinite;}
+@keyframes coverFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.cover-frame{position:absolute;top:10px;left:10px;right:10px;bottom:52px;border:4px solid var(--pk-a);border-radius:22px;z-index:1;pointer-events:none;box-shadow:inset 0 0 30px rgba(var(--pk-a-rgb),.2);}
+.cover-frame::before{content:'';position:absolute;top:5px;left:5px;right:5px;bottom:5px;border:2px dashed rgba(var(--pk-m-rgb),.6);border-radius:17px;}
+.cover-frame::after{content:'';position:absolute;top:10px;left:10px;right:10px;bottom:10px;border:1px solid rgba(var(--pk-m-rgb),.4);border-radius:13px;}
+.cover-corner{position:absolute;z-index:3;pointer-events:none;font-size:28px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.1));}
+.cover-corner.ctl{top:14px;left:16px;}.cover-corner.ctr{top:14px;right:16px;}
+.cover-corner.cbl{bottom:14px;left:16px;}.cover-corner.cbr{bottom:14px;right:16px;}
+
+/* Profile */
+.pr{display:flex;align-items:center;padding:12px 0;border-bottom:1.5px solid #f0e8d8;}
+.pr:last-child{border-bottom:none;}
+.pr .pl{width:100px;font-size:14px;color:var(--tl);font-weight:500;letter-spacing:2px;flex-shrink:0;}
+.pr .pv{font-size:18px;color:var(--td);font-weight:700;}
+
+/* Icon cards */
+.card-section{flex:1;max-width:400px;}
+.card-section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.card-section-icon{font-size:28px;}
+.card-section-title{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size:clamp(20px,2.5vw,30px);font-weight:900;
+  background:linear-gradient(135deg,var(--pk-d),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.card-section.alt .card-section-title{background:linear-gradient(135deg,#7b6b9e,#b8a9d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.card-section.mint .card-section-title{background:linear-gradient(135deg,#3d8b7a,#7ecfc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.card-section.peach .card-section-title{background:linear-gradient(135deg,#b06030,#ffb088);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.icon-cards{display:flex;flex-wrap:wrap;gap:12px;}
+.icon-card{display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border-radius:14px;padding:14px 8px;border:2px solid #ffe8f0;width:calc(50% - 6px);min-height:80px;justify-content:center;transition:transform .2s;box-shadow:0 2px 8px rgba(255,180,200,.06);}
+.icon-card:hover{transform:translateY(-2px);}
+.icon-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;}
+.icon-circle.pk-bg{background:linear-gradient(135deg,#ffe0ec,#ffc8dd);}
+.icon-circle.lv-bg{background:linear-gradient(135deg,#e8e0f0,#d4c5ef);}
+.icon-circle.mn-bg{background:linear-gradient(135deg,#d0f0e8,#a8e6cf);}
+.icon-circle.pc-bg{background:linear-gradient(135deg,#ffe8d0,#ffd0b5);}
+.ic-text{font-size:14px;color:var(--tm);font-weight:500;text-align:center;line-height:1.4;}
+.card-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:30px;flex-shrink:0;}
+.card-mid-dot{width:6px;height:6px;border-radius:50%;background:var(--pk-m);}
+.card-mid-heart{font-size:16px;color:var(--pk-a);}
+
+/* Donut */
+.cw{display:flex;align-items:center;gap:44px;}
+.dw{position:relative;width:220px;height:220px;}
+.dw svg{width:100%;height:100%;transform:rotate(-90deg);}
+.dc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.dc .em{font-size:28px;}.dc .lb{font-size:13px;color:var(--tl);font-weight:500;}
+.lg{display:flex;flex-direction:column;gap:16px;}
+.li{display:flex;align-items:center;gap:12px;}
+.lc{width:15px;height:15px;border-radius:5px;flex-shrink:0;}
+.ll{font-size:16px;color:var(--tm);font-weight:500;}.lp{font-size:22px;color:var(--td);font-weight:900;margin-left:6px;}
+
+/* Checklist */
+.ckl{display:flex;flex-direction:column;gap:12px;width:min(560px,66vw);}
+.cki{display:flex;align-items:center;gap:14px;background:#fff;padding:14px 20px;border-radius:14px;border:2px solid #ffe8f0;cursor:pointer;transition:all .3s;user-select:none;box-shadow:0 2px 6px rgba(255,180,200,.05);}
+.cki:hover{border-color:var(--pk-a);transform:translateX(4px);}
+.cki.chk{border-color:var(--pk-a);background:var(--pk-s);}
+.ckb{width:26px;height:26px;border-radius:6px;border:2.5px solid var(--pk-m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:transparent;transition:all .3s;}
+.cki.chk .ckb{background:var(--pk);border-color:var(--pk);color:#fff;}
+.ckt{font-size:clamp(15px,1.6vw,18px);color:var(--tm);font-weight:500;transition:all .3s;}
+.cki.chk .ckt{color:var(--pk-d);font-weight:700;}
+.cki-icon{font-size:18px;flex-shrink:0;}
+
+/* QnA */
+.qb{
+  font-family: 'PartialSans', sans-serif;
+  font-size:clamp(70px,10vw,120px);font-weight:normal;letter-spacing:8px;
+  background:linear-gradient(135deg,var(--pk-dd),var(--pk-d),var(--pk),#ffb6d3);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(3px 3px 0 var(--pk-m));
+}
+.qs{font-size:clamp(16px,1.8vw,20px);color:var(--tl);font-weight:500;letter-spacing:3px;margin-top:10px;}
+
+/* Thanks */
+.ts{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size:16px;color:var(--tl);font-weight:400;letter-spacing:6px;margin-bottom:6px;
+}
+.tm-txt{
+  font-family: 'PartialSans', sans-serif;
+  font-size:clamp(50px,7vw,80px);font-weight:normal;letter-spacing:var(--thanks-letter-spacing);
+  background:linear-gradient(135deg,var(--pk-d),var(--pk),#ffb6d3);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(3px 3px 0 var(--pk-m));margin-bottom:14px;
+}
+.td-txt{font-size:30px;letter-spacing:12px;opacity:.4;margin-top:18px;}
+
+
+/* --- 요청 수정 사항 적용 --- */
+
+/* 1. 표지 이미지 좌측 상하단 꽉 채우기 */
+.sl[data-slide-kind="cover"] .lr {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding: 0;
+  top: 0; 
+  left: 0; 
+  transform: none;
+}
+.sl[data-slide-kind="cover"] .cc {
+  width: 45%; /* 좌측 영역 비율 */
+  height: 100%;
+}
+.sl[data-slide-kind="cover"] .cc img {
+  object-fit: cover;
+  /* 이미지가 우측 텍스트 영역으로 부드럽게 스며들도록 마스크 방향 수정 */
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+.sl[data-slide-kind="cover"] .tc {
+  padding: 0 5%;
+}
+
+/* 2. 폰트 획 겹침 및 도트 깨짐 현상 수정 (커버 타이틀) */
+.cover-title {
+  /* 깨짐 현상을 유발하는 text-stroke를 제거하고 부드러운 그림자로 흰색 획을 대체합니다. */
+  -webkit-text-stroke: 0 !important;
+  filter: 
+    drop-shadow(2px 2px 0px #ffffff) 
+    drop-shadow(-2px -2px 0px #ffffff) 
+    drop-shadow(2px -2px 0px #ffffff) 
+    drop-shadow(-2px 2px 0px #ffffff) 
+    drop-shadow(3px 3px 0 var(--pk-d)) 
+    drop-shadow(0 0 15px rgba(232,114,154,.4)) !important;
+}
+
+/* 3. 프로필/QNA 이미지 포스트잇(메모지) 대지 효과 (표지 제외 자동 적용) */
+.sl:not([data-slide-kind="cover"]) .cc {
+  background: #ffffff; /* 백색 */
+  border: 1px solid #f0e8d8;
+  box-shadow: 2px 4px 16px rgba(200,170,130,0.15);
+  border-radius: 4px;
+  margin: 40px 20px;
+  height: calc(100% - 80px);
+  overflow: visible; /* 마스킹 테이프가 잘리지 않도록 허용 */
+}
+/* 포스트잇 상단 반투명 테이프 */
+.sl:not([data-slide-kind="cover"]) .cc::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 100px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+/* 메모지 안의 이미지가 온전히 돋보이도록 기존 하단 투명화 마스크 제거 */
+.sl:not([data-slide-kind="cover"]) .cc img {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: none !important;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* --- 추가 요청 수정 사항 --- */
+
+/* 1. 메인 표지 텍스트 색상 변경 (가독성 향상) */
+.cover-title {
+  /* 텍스트를 짙은 자줏빛~진한 핑크 그라데이션으로 변경 */
+  background: linear-gradient(135deg, var(--pk), var(--pk-dd), var(--tm), var(--td)) !important;
+  background-size: 200% 200% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  /* 하얀색 테두리와 그림자로 배경과 분리 */
+  filter: 
+    drop-shadow(2px 2px 0px #ffffff) 
+    drop-shadow(-2px -2px 0px #ffffff) 
+    drop-shadow(2px -2px 0px #ffffff) 
+    drop-shadow(-2px 2px 0px #ffffff) 
+    drop-shadow(4px 4px 0px var(--pk-m)) !important;
+}
+
+/* 2. Q&A 텍스트 표지 수준으로 빡세게 강조 */
+.qb {
+  /* 표지와 동일한 다중 그림자(테두리) 기법 적용 */
+  filter: 
+    drop-shadow(2px 2px 0px #ffffff) 
+    drop-shadow(-2px -2px 0px #ffffff) 
+    drop-shadow(2px -2px 0px #ffffff) 
+    drop-shadow(-2px 2px 0px #ffffff) 
+    drop-shadow(4px 4px 0 var(--pk-d)) 
+    drop-shadow(0 0 15px rgba(232,114,154,.4)) !important;
+}
+
+/* 3. 프로필 이미지(메모지)와 텍스트 영역 간격 확장 */
+.sl:not([data-slide-kind="cover"]) .lr {
+  gap: 6%; /* 두 영역 사이의 간격을 6%만큼 강제 부여 */
+}
+.sl:not([data-slide-kind="cover"]) .cc {
+  width: 38% !important; /* 여백이 늘어난 만큼 이미지 대지 영역 소폭 축소 */
+}
+
+/* --- QnA 페이지 텍스트 이동 및 배경 장식 추가 --- */
+
+/* 1. "무엇이든 물어보세요" 텍스트 하향 및 전체 그룹 이동 */
+.cl:has(.qb) {
+  /* 기존 중앙 정렬(translate -50%, -50%)을 유지하면서 아래로 40px 추가 이동 */
+  transform: translate(-50%, calc(-50% + 40px)) !important;
+}
+.qs {
+  margin-top: 40px !important; /* Q&A 타이틀과의 간격을 넓게 벌림 */
+  position: relative;
+  z-index: 2; /* 텍스트가 배경 장식보다 무조건 위에 오도록 설정 */
+}
+.qb {
+  position: relative;
+  z-index: 2;
+}
+
+/* 2. 빈 공간을 채우는 부유하는 대형 물음표 (배경) */
+.cl:has(.qb)::before {
+  content: '?';
+  position: absolute;
+  font-family: 'PartialSans', sans-serif;
+  font-size: 400px;
+  color: var(--pk-dd);
+  opacity: 0.05; /* 텍스트 가독성을 해치지 않도록 매우 옅게 설정 */
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  pointer-events: none;
+  animation: floatQnaBg 6s ease-in-out infinite;
+}
+
+/* 3. 우측 상단 밋밋한 공간을 채우는 반짝이 장식 */
+.cl:has(.qb)::after {
+  content: '✨';
+  position: absolute;
+  font-size: 50px;
+  top: 15%;
+  right: 20%;
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+  animation: floatQnaDeco 4s ease-in-out infinite reverse;
+}
+
+/* 장식용 애니메이션 키프레임 */
+@keyframes floatQnaBg {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-12deg) translateY(0); }
+  50% { transform: translate(-50%, -50%) rotate(-8deg) translateY(-30px); }
+}
+@keyframes floatQnaDeco {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1); }
+}
+
+
+
+/* ===== PPT 16:9 stage + export controls ===== */
+:root{
+  --stage-w: 1920;
+  --stage-h: 1080;
+}
+html,body{height:100%;}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(var(--pk-m-rgb),.22), transparent 28%),
+    radial-gradient(circle at 80% 15%, rgba(var(--pk-m-rgb),.28), transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(var(--pk-a-rgb),.18), transparent 32%),
+    linear-gradient(135deg, #1b1119 0%, #2c1830 45%, #160e16 100%);
+  overflow:hidden;
+}
+.pres{
+  width:calc(var(--stage-w) * 1px);
+  height:calc(var(--stage-h) * 1px);
+  position:relative;
+  transform-origin:center center;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.12);
+}
+.sl{width:1920px;height:1080px;}
+.sl::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,.55), transparent 20%),
+    radial-gradient(circle at 88% 22%, rgba(255,255,255,.24), transparent 16%),
+    radial-gradient(circle at 78% 78%, rgba(var(--pk-m-rgb),.45), transparent 22%),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 24%, transparent 70%, rgba(255,255,255,.08));
+  pointer-events:none;z-index:0;
+}
+.frame{top:18px;left:18px;right:18px;bottom:68px;border-width:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);}
+.paper{
+  width:calc(84% - var(--paper-width-shrink));
+  max-width:none;
+  height:84%;
+  border-radius:24px;
+  box-shadow:0 18px 45px rgba(196,138,168,.18), inset 0 0 36px rgba(255,250,240,.65);
+}
+.paper::after{
+  content:'';position:absolute;inset:16px;border-radius:18px;
+  border:1px dashed rgba(232,114,154,.14);pointer-events:none;
+}
+.lr, .cl, .card-page{
+  width:calc(84% - var(--paper-width-shrink));
+  max-width:none;
+  height:84%;
+}
+.lr{padding:44px 18px;}
+.tc{padding:0 5% 0 3%;}
+.tag{font-size:16px;padding:10px 28px;border-radius:999px;letter-spacing:4px;box-shadow:0 8px 24px rgba(232,114,154,.18);}
+.deco-line{width:92px;height:6px;border-radius:999px;margin:16px 0 20px;}
+.sub-grad{font-size:26px;line-height:1.85;max-width:760px;}
+.slbl{font-size:16px;margin-bottom:10px;}
+.sh{font-size:62px;line-height:1.15;margin-bottom:22px;}
+.pr{padding:var(--profile-row-padding-y) 0;border-bottom:1px solid rgba(196,138,168,.26);}
+.pr .pl{width:140px;font-size:18px;}
+.pr .pv{font-size:29px;}
+.card-page{gap:var(--card-page-gap);padding:var(--card-page-padding);}
+.card-section{max-width:520px;}
+.card-section-title{font-size:34px;}
+.icon-cards{gap:16px;}
+.icon-card{width:calc(50% - 8px);padding:18px 10px;border-radius:18px;min-height:110px;box-shadow:0 10px 24px rgba(255,180,200,.12);}
+.icon-circle{width:62px;height:62px;font-size:28px;}
+.ic-text{font-size:18px;}
+.ckl{width:min(920px,74vw);gap:var(--ckl-gap);}
+.cki{padding:var(--cki-padding-y) 24px;border-radius:18px;}
+.cki-icon{font-size:24px;}
+.ckt{font-size:24px;}
+.qs{font-size:28px;}
+.ts{font-size:20px;}.td-txt{font-size:38px;}
+.nb,.na,.pn{z-index:300;}
+
+/* ===== 5페이지 방송특징: 2컬럼 레이아웃 ===== */
+.content-cl{padding:var(--content-cl-padding-y) var(--content-cl-padding-x);}
+.content-header{margin-bottom:var(--content-header-mb);}
+.sl[data-slide-kind="goals"] .content-header{margin-bottom:var(--goals-header-mb);}
+.content-split{
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  gap:var(--content-split-gap);
+  width:100%;
+  margin-top:6px;
+}
+.content-col{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:var(--content-col-gap);
+  min-width:0;
+  align-items:stretch;
+}
+.content-col:first-child{align-items:center;}
+.content-subtitle{
+  font-family:'GmarketSansMedium',sans-serif;
+  font-size:28px;font-weight:900;letter-spacing:1px;
+  background:linear-gradient(135deg,var(--pk-d),var(--pk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;
+}
+.sched-list{display:flex;flex-direction:column;gap:12px;}
+.sched-row{
+  display:flex;align-items:center;gap:18px;
+  background:#fff;padding:var(--sched-row-padding-y) 22px;border-radius:14px;
+  border:2px solid rgba(var(--pk-m-rgb),.7);
+  box-shadow:0 4px 12px rgba(var(--pk-m-rgb),.25);
+}
+.sched-lbl{
+  flex-shrink:0;width:56px;font-weight:800;color:var(--pk-d);
+  font-size:22px;letter-spacing:2px;
+}
+.sched-val{
+  font-size:24px;color:var(--td);font-weight:700;letter-spacing:3px;
+  font-family:'GmarketSansMedium',sans-serif;
+}
+.weekdays{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:var(--weekday-gap);margin-top:6px;
+}
+.wd-cell{
+  font-family:'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  font-size:22px;font-weight:800;
+  aspect-ratio:1;border-radius:12px;
+  border:2.5px solid rgba(var(--pk-m-rgb),.7);
+  background:#fff;color:var(--tl);cursor:pointer;
+  transition:all .2s ease;padding:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.wd-cell:hover{border-color:var(--pk-a);transform:translateY(-2px);}
+.wd-cell.on{
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;border-color:transparent;
+  box-shadow:0 6px 16px rgba(var(--pk-rgb),.35);
+}
+.export-toolbar{
+  position:absolute;top:18px;left:22px;z-index:320;display:flex;gap:10px;align-items:center;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(14px);padding:10px 14px;border-radius:18px;
+  border:2px solid rgba(255,214,231,.95);box-shadow:0 10px 28px rgba(0,0,0,.12);
+}
+.export-toolbar button{
+  border:none;border-radius:12px;padding:10px 14px;cursor:pointer;font:700 14px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));color:#fff;box-shadow:0 6px 16px rgba(232,114,154,.22);
+}
+.export-toolbar button.secondary{background:#fff;color:var(--pk-d);border:1px solid rgba(232,114,154,.22);box-shadow:none;}
+.export-toolbar .hint{font-size:12px;color:var(--tm);white-space:nowrap;}
+.exporting .export-toolbar,.exporting .nb,.exporting .na,.exporting .pn{display:none!important;}
+@media (max-width: 1400px){.export-toolbar .hint{display:none;}}
+
+
+/* ===== Image manager ===== */
+.managed-slide-image{
+  background:transparent;
+}
+.cc:has(.managed-slide-image[data-empty="true"])::after{
+  content:attr(data-placeholder);
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:32px;
+  color:var(--tl);
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:1px;
+  line-height:1.7;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,240,245,.95)),
+    repeating-linear-gradient(45deg, rgba(232,114,154,.06) 0 12px, rgba(255,255,255,0) 12px 24px);
+  border:2px dashed rgba(232,114,154,.28);
+  border-radius:inherit;
+  z-index:1;
+  pointer-events:none;
+}
+.sl[data-slide-kind="cover"] .cc:has(.managed-slide-image[data-empty="true"])::after{
+  inset:28px;
+  border-radius:24px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,240,245,.88)),
+    repeating-linear-gradient(45deg, rgba(232,114,154,.08) 0 16px, rgba(255,255,255,0) 16px 32px);
+}
+.sl[data-slide-kind="cover"] .cc:has(.managed-slide-image[data-empty="true"]){
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.75), rgba(255,240,245,.4) 55%, rgba(255,240,245,0) 85%);
+}
+.sl:not([data-slide-kind="cover"]) .cc:has(.managed-slide-image[data-empty="true"]){
+  background:#fff7fb;
+}
+.managed-slide-image[data-empty="true"]{
+  opacity:0;
+}
+.image-manager-panel{
+  position:fixed;
+  top:150px;
+  left:22px;
+  width:440px;
+  max-height:calc(100vh - 180px);
+  z-index:321;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255, var(--panel-bg-alpha, .93));
+  border:2px solid rgba(255,214,231,.95);
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  backdrop-filter:blur(18px);
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.image-manager-panel.open{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.image-manager-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.image-manager-title{
+  font:800 18px/1.3 'GmarketSansMedium','NanumSquareRound',sans-serif;
+  color:var(--td);
+}
+.image-manager-desc{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--tm);
+  line-height:1.5;
+}
+.image-manager-close{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:#fff;
+  color:var(--pk-d);
+  border:1px solid rgba(232,114,154,.18);
+}
+.image-manager-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.image-manager-tab{
+  border:none;
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font:700 13px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:#fff;
+  color:var(--tm);
+  border:1px solid rgba(232,114,154,.18);
+}
+.image-manager-tab.active{
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;
+  border-color:transparent;
+}
+.image-manager-body{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  overflow:auto;
+  padding-right:4px;
+}
+.image-manager-group{
+  display:none;
+  flex-direction:column;
+  gap:10px;
+}
+.image-manager-group.active{
+  display:flex;
+}
+.image-manager-card{
+  background:#fff;
+  border:1px solid rgba(232,114,154,.14);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 6px 18px rgba(255,180,200,.08);
+}
+.image-manager-card-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:10px;
+}
+.image-manager-card-title{
+  font-size:15px;
+  font-weight:800;
+  color:var(--td);
+}
+.image-manager-card-sub{
+  font-size:12px;
+  color:var(--tl);
+  margin-top:4px;
+}
+.image-manager-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.image-manager-file,
+.image-manager-clear,
+.image-manager-jump{
+  border:none;
+  border-radius:12px;
+  padding:9px 12px;
+  cursor:pointer;
+  font:700 12px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+}
+.image-manager-file{
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;
+}
+.image-manager-clear,
+.image-manager-jump{
+  background:#fff;
+  color:var(--pk-d);
+  border:1px solid rgba(232,114,154,.18);
+}
+.image-manager-status{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--tm);
+}
+.image-manager-hidden-input{
+  display:none;
+}
+.exporting .image-manager-panel{
+  display:none!important;
+}
+
+/* ===== Export / Import / Reset 버튼 ===== */
+.edit-panel-io{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  margin-top:10px;
+}
+.edit-panel-io-btn{
+  border:none;border-radius:10px;padding:8px 14px;cursor:pointer;
+  font:700 12px/1.2 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;
+  box-shadow:0 3px 8px rgba(var(--pk-rgb),.22);
+  height:32px;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.edit-panel-io-btn:hover{transform:translateY(-1px);}
+.edit-panel-io-btn.secondary{
+  background:#fff;color:var(--pk-d);
+  border:1px solid rgba(var(--pk-rgb),.2);
+  box-shadow:none;
+}
+.edit-panel-io-btn.danger{
+  background:linear-gradient(135deg,#d4568a,#a83860);
+}
+/* "이미지 포함" 체크박스 버튼과 동일 높이/폰트 */
+.edit-panel-io-opt{
+  display:inline-flex;align-items:center;gap:6px;
+  font:700 12px/1.2 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--pk-d);
+  cursor:pointer;user-select:none;
+  padding:8px 12px;border-radius:10px;
+  background:#fff;
+  border:1px solid rgba(var(--pk-rgb),.2);
+  height:32px;
+}
+.edit-panel-io-opt input{cursor:pointer;accent-color:var(--pk);margin:0;}
+
+/* ===== 패널 하단 footer (투명도) ===== */
+.edit-panel-footer{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid rgba(var(--pk-rgb),.14);
+  display:flex;align-items:center;gap:10px;
+  justify-content:flex-end;
+}
+.edit-panel-footer-label{
+  font-size:11px;color:var(--tl);font-weight:700;
+}
+.edit-panel-opacity-slider{
+  flex:1;max-width:180px;accent-color:var(--pk);cursor:pointer;
+}
+.edit-panel-footer-value{
+  font:700 11px/1 'Courier New',monospace;
+  color:var(--pk-d);
+  background:var(--pk-s);
+  padding:4px 8px;border-radius:6px;
+  min-width:38px;text-align:center;
+}
+
+/* ===== Edit panel: main tabs + sections ===== */
+.edit-panel-main-tabs{
+  display:flex;flex-wrap:wrap;
+  gap:6px;
+  padding:4px;
+  border-radius:14px;
+  background:rgba(255,240,245,.8);
+  border:1px solid rgba(232,114,154,.14);
+}
+.edit-panel-main-tab{
+  flex:1 1 auto;
+  min-width:72px;
+  border:none;
+  border-radius:10px;
+  padding:9px 10px;
+  cursor:pointer;
+  font:700 12px/1.1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:transparent;
+  color:var(--tm);
+  transition:all .2s;
+  white-space:nowrap;
+}
+.edit-panel-main-tab:hover{
+  background:rgba(255,255,255,.7);
+  color:var(--pk-d);
+}
+.edit-panel-main-tab.active{
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;
+  box-shadow:0 4px 12px rgba(232,114,154,.25);
+}
+.edit-panel-section{
+  display:none;
+  flex-direction:column;
+  gap:12px;
+  overflow:auto;
+  flex:1;
+  padding-right:4px;
+}
+.edit-panel-section.active{
+  display:flex;
+}
+
+/* ===== Text editor ===== */
+.text-editor-card{
+  background:#fff;
+  border:1px solid rgba(232,114,154,.14);
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 4px 12px rgba(255,180,200,.06);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.text-editor-label{
+  font-size:12px;
+  font-weight:700;
+  color:var(--pk-d);
+  letter-spacing:.5px;
+}
+.text-editor-hint{
+  font-size:10px;
+  color:var(--tl);
+  margin-bottom:2px;
+}
+.text-editor-input,
+.text-editor-textarea{
+  width:100%;
+  border:1.5px solid rgba(232,114,154,.2);
+  border-radius:10px;
+  padding:8px 10px;
+  font:500 13px/1.4 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--td);
+  background:#fff7fb;
+  resize:vertical;
+  transition:border-color .2s;
+}
+.text-editor-input:focus,
+.text-editor-textarea:focus{
+  outline:none;
+  border-color:var(--pk);
+  background:#fff;
+}
+.text-editor-textarea{min-height:50px;}
+
+/* === 리스트 편집 (3/4/6페이지) === */
+.list-editor .list-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:6px;margin-bottom:6px;
+}
+.list-items{display:flex;flex-direction:column;gap:6px;}
+.list-item-row{
+  display:flex;gap:6px;align-items:flex-start;
+  background:#fff7fb;border-radius:10px;padding:6px;
+  border:1px solid rgba(232,114,154,.12);
+}
+.list-icon-input{
+  flex-shrink:0;width:42px;
+  border:1.5px solid rgba(232,114,154,.2);
+  border-radius:8px;padding:6px 4px;
+  font:600 18px/1.2 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;
+  text-align:center;background:#fff;
+}
+.list-text-input{
+  flex:1;min-width:0;
+  border:1.5px solid rgba(232,114,154,.2);
+  border-radius:8px;padding:6px 8px;
+  font:500 12px/1.3 'NanumSquareRound',sans-serif;
+  color:var(--td);background:#fff;resize:vertical;min-height:32px;
+}
+.list-icon-input:focus,.list-text-input:focus{
+  outline:none;border-color:var(--pk);
+}
+.list-del-btn{
+  flex-shrink:0;width:28px;height:28px;
+  border:none;border-radius:7px;cursor:pointer;
+  background:#fff;color:var(--pk-d);font-size:14px;
+  border:1px solid rgba(232,114,154,.2);line-height:1;
+  align-self:center;
+}
+.list-del-btn:hover{background:#ffe0e8;color:#b8407a;}
+.list-add-btn{
+  margin-top:6px;border:none;border-radius:10px;
+  padding:8px 12px;cursor:pointer;
+  font:700 12px/1 'NanumSquareRound',sans-serif;
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));
+  color:#fff;box-shadow:0 3px 10px rgba(var(--pk-rgb),.2);
+  align-self:flex-start;
+}
+.list-add-btn:hover{transform:translateY(-1px);}
+
+/* ===== Theme editor ===== */
+.theme-preset-row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.theme-preset-title{
+  font-size:12px;
+  font-weight:800;
+  color:var(--td);
+  letter-spacing:.5px;
+}
+.theme-preset-buttons{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+}
+.theme-preset-btn{
+  border:none;
+  border-radius:12px;
+  padding:10px 6px;
+  cursor:pointer;
+  font:700 12px/1.2 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  transition:transform .15s ease;
+}
+.theme-preset-btn:hover{transform:translateY(-2px);}
+.theme-preset-btn.active{
+  outline:3px solid rgba(0,0,0,.2);
+  outline-offset:2px;
+}
+.theme-controls{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.theme-control-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid rgba(232,114,154,.14);
+  border-radius:12px;
+  padding:8px 12px;
+}
+.theme-control-swatch{
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,.08);
+  cursor:pointer;
+  flex-shrink:0;
+  padding:0;
+  overflow:hidden;
+}
+.theme-control-swatch input{
+  width:100%;
+  height:100%;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  background:none;
+}
+.theme-control-info{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.theme-control-label{
+  font-size:13px;
+  font-weight:700;
+  color:var(--td);
+}
+.theme-control-hint{
+  font-size:10px;
+  color:var(--tl);
+}
+.theme-control-hex{
+  font:600 11px/1 'Courier New', monospace;
+  color:var(--tm);
+  background:#fff7fb;
+  padding:4px 8px;
+  border-radius:6px;
+  border:1px solid rgba(232,114,154,.15);
+  width:72px;
+  text-transform:uppercase;
+}
+.theme-reset-btn{
+  border:none;
+  border-radius:12px;
+  padding:10px 14px;
+  cursor:pointer;
+  font:700 12px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:#fff;
+  color:var(--pk-d);
+  border:1px solid rgba(232,114,154,.22);
+  box-shadow:0 2px 6px rgba(255,180,200,.1);
+}
+.theme-reset-btn:hover{background:var(--pk-s);}
+
+/* ===== Layout editor ===== */
+.layout-desc{
+  font-size:11px;color:var(--tl);
+  padding:8px 12px;background:rgba(var(--pk-rgb),.04);
+  border-radius:10px;border:1px solid rgba(var(--pk-rgb),.12);
+}
+.layout-controls{
+  display:flex;flex-direction:column;gap:10px;
+}
+.layout-control-row{
+  background:#fff;border:1px solid rgba(var(--pk-rgb),.14);
+  border-radius:12px;padding:10px 12px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.layout-control-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+}
+.layout-control-label{font-size:13px;font-weight:700;color:var(--td);}
+.layout-control-value{
+  font:700 12px/1 'Courier New',monospace;color:var(--pk-d);
+  background:var(--pk-s);padding:3px 8px;border-radius:6px;min-width:48px;text-align:center;
+}
+.layout-control-hint{font-size:10px;color:var(--tl);line-height:1.4;}
+.layout-control-slider{
+  width:100%;accent-color:var(--pk);
+  cursor:pointer;
+}
+
+/* ===== 슬라이드 관리 ===== */
+.slides-list{
+  display:flex;flex-direction:column;gap:8px;
+}
+.slide-row{
+  display:grid;
+  grid-template-columns:32px 1fr auto;
+  gap:8px;align-items:center;
+  background:#fff;
+  border:1.5px solid rgba(var(--pk-rgb),.18);
+  border-radius:12px;
+  padding:10px 12px;
+  transition:all .15s;
+}
+.slide-row:hover{border-color:rgba(var(--pk-rgb),.4);}
+.slide-row.current{
+  background:linear-gradient(135deg,#fff,var(--pk-s));
+  border-color:var(--pk);
+  box-shadow:0 2px 10px rgba(var(--pk-rgb),.18);
+}
+.slide-row-num{
+  font:800 16px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--pk-d);
+  text-align:center;
+  background:var(--pk-s);
+  border-radius:8px;
+  padding:6px 0;
+}
+.slide-row.current .slide-row-num{
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));color:#fff;
+}
+.slide-row-info{
+  display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0;
+}
+.slide-row-title{
+  font:700 13px/1.2 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--td);
+}
+.slide-row-kind{
+  font-size:10px;color:var(--tl);font-family:monospace;
+}
+.slide-row-actions{
+  display:flex;gap:3px;
+}
+.slide-row-btn{
+  border:none;background:#fff;
+  border:1px solid rgba(var(--pk-rgb),.2);
+  border-radius:8px;
+  width:28px;height:28px;
+  cursor:pointer;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0;
+  transition:all .15s;
+}
+.slide-row-btn:hover{background:var(--pk-s);color:var(--pk-d);}
+.slide-row-btn.danger{color:#c04060;}
+.slide-row-btn.danger:hover{background:#ffe8ed;}
+.slide-row-btn:disabled{opacity:.3;cursor:not-allowed;}
+
+.slides-add-row{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding-top:10px;border-top:1px solid rgba(var(--pk-rgb),.14);
+}
+.slides-add-label{
+  font:700 11px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--tl);
+}
+.slides-add-select{
+  border:1.5px solid rgba(var(--pk-rgb),.2);
+  border-radius:8px;
+  padding:6px 8px;
+  font:600 12px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:#fff;color:var(--td);
+  cursor:pointer;
+  flex:1;min-width:120px;
+}
+/* toggle 타입 레이아웃 컨트롤 */
+.layout-toggle-label{
+  display:flex;align-items:flex-start;gap:10px;
+  cursor:pointer;user-select:none;
+  width:100%;
+}
+.layout-toggle-label input[type="checkbox"]{
+  cursor:pointer;accent-color:var(--pk);
+  margin-top:2px;flex-shrink:0;
+}
+.layout-toggle-text{
+  display:flex;flex-direction:column;gap:2px;flex:1;
+}
+
+/* ===== Sticker editor ===== */
+.sticker-quick-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  background:rgba(255,240,245,.6);
+  border:1px solid rgba(232,114,154,.12);
+  border-radius:12px;
+  flex-wrap:wrap;
+}
+.sticker-quick-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--pk-d);
+}
+.sticker-quick-buttons{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+}
+.sticker-quick-btn{
+  border:none;
+  background:#fff;
+  border:1px solid rgba(232,114,154,.2);
+  border-radius:8px;
+  padding:4px 8px;
+  cursor:pointer;
+  font-size:16px;
+  line-height:1;
+  transition:transform .1s;
+}
+.sticker-quick-btn:hover{transform:scale(1.15);}
+.sticker-card{
+  background:#fff;
+  border:1px solid rgba(232,114,154,.14);
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 12px rgba(255,180,200,.06);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sticker-preview{
+  width:44px;
+  height:44px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  background:linear-gradient(135deg, var(--pk-s), var(--pk-l));
+  border-radius:10px;
+  border:1px solid rgba(232,114,154,.15);
+}
+.sticker-card-info{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  min-width:0;
+}
+.sticker-card-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--tl);
+  letter-spacing:.5px;
+}
+.sticker-input{
+  border:1.5px solid rgba(232,114,154,.2);
+  border-radius:8px;
+  padding:6px 10px;
+  font:600 16px/1.2 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;
+  color:var(--td);
+  background:#fff7fb;
+  width:100%;
+}
+.sticker-input:focus{
+  outline:none;
+  border-color:var(--pk);
+  background:#fff;
+}
+.sticker-jump-btn{
+  border:none;
+  background:#fff;
+  color:var(--pk-d);
+  border:1px solid rgba(232,114,154,.2);
+  border-radius:8px;
+  padding:6px 10px;
+  font:700 11px/1 'NanumSquareRound',sans-serif;
+  cursor:pointer;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.sticker-jump-btn:hover{background:var(--pk-s);}
+
+/* ===== 리스트(3/4/6페이지) 편집 UI ===== */
+.list-editor{
+  background:linear-gradient(135deg, #fff, var(--pk-s));
+  border:1.5px solid rgba(var(--pk-rgb),.18);
+}
+.list-add-btn{
+  border:none;border-radius:10px;
+  padding:6px 12px;cursor:pointer;
+  font:700 12px/1 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  background:linear-gradient(135deg,var(--pk),var(--pk-a));color:#fff;
+  box-shadow:0 3px 8px rgba(var(--pk-rgb),.22);
+}
+.list-add-btn:hover{transform:translateY(-1px);}
+.list-items{display:flex;flex-direction:column;gap:8px;}
+.list-item-row{
+  display:grid;
+  grid-template-columns:42px 1fr auto auto;
+  gap:6px;align-items:stretch;
+}
+.list-icon-input{
+  border:1.5px solid rgba(var(--pk-rgb),.2);
+  border-radius:8px;padding:6px;text-align:center;
+  font-size:16px;background:#fff7fb;
+  font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;
+}
+.list-text-input{
+  border:1.5px solid rgba(var(--pk-rgb),.2);
+  border-radius:8px;padding:6px 10px;
+  font:500 12px/1.4 'NanumSquareRound','Apple SD Gothic Neo',sans-serif;
+  color:var(--td);background:#fff7fb;
+  resize:vertical;min-height:34px;
+}
+.list-icon-input:focus,.list-text-input:focus{
+  outline:none;border-color:var(--pk);background:#fff;
+}
+.list-move-btn,.list-del-btn{
+  border:none;border-radius:8px;
+  width:30px;cursor:pointer;
+  font:700 14px/1 sans-serif;
+  background:#fff;color:var(--tm);
+  border:1px solid rgba(var(--pk-rgb),.18);
+  padding:0;
+}
+.list-move-btn:hover{background:var(--pk-s);color:var(--pk-d);}
+.list-del-btn{color:#c04060;}
+.list-del-btn:hover{background:#ffe8ed;}
+/* 리스트 항목별 클릭 공개 체크박스 */
+.list-item-reveal{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--tm);
+  padding:4px 8px;margin:-2px 0 4px;
+  background:rgba(var(--pk-rgb),.04);
+  border-radius:8px;
+  cursor:pointer;user-select:none;
+}
+.list-item-reveal input{cursor:pointer;accent-color:var(--pk);}
+/* 한 항목의 토글 옵션들을 가로 배치 */
+.list-item-opts{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin:-2px 0 4px;
+}
+.list-item-opts .list-item-reveal{margin:0;}
+
+/* 슬라이드 위 잠긴 체크리스트 항목 */
+.cki.cki-locked{
+  cursor:default !important;
+  opacity:.75;
+  background:#faf9f7;
+}
+.cki.cki-locked:hover{
+  border-color:rgba(var(--pk-rgb),.2) !important;
+  transform:none !important;
+}
+.cki.cki-locked .ckb{
+  border-color:#d8d0cc !important;
+  background:transparent !important;
+  color:transparent !important;
+}
+
+/* ===== QnA 미니멀 모드 ===== */
+/* 체크 시 QnA 슬라이드의 이미지/서브 문구를 숨기고 타이틀만 중앙 강조 */
+body.qna-minimal .sl[data-slide-kind="qna"] .cc{ display:none !important; }
+body.qna-minimal .sl[data-slide-kind="qna"] .qs{ display:none !important; }
+body.qna-minimal .sl[data-slide-kind="qna"] .lr{
+  justify-content:center;
+  align-items:center;
+}
+body.qna-minimal .sl[data-slide-kind="qna"] .tc{
+  flex:none;
+  width:auto;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+/* 슬라이드 위 숨겨진 아이템 카드 스타일 */
+.icon-card.item-reveal[data-reveal-state="hidden"]{
+  cursor:pointer;
+  border-color:rgba(var(--pk-rgb),.5);
+  background:linear-gradient(135deg,#fff,rgba(var(--pk-rgb),.08));
+  animation:revealPulse 2.5s ease-in-out infinite;
+}
+.icon-card.item-reveal[data-reveal-state="hidden"]:hover{transform:scale(1.03);}
+.icon-card.item-reveal[data-reveal-state="shown"]{animation:revealShow .4s ease;}
+.cki.item-reveal[data-reveal-state="hidden"]{
+  cursor:pointer;
+  border-color:rgba(var(--pk-rgb),.5);
+  background:linear-gradient(135deg,#fff,rgba(var(--pk-rgb),.08));
+}
+
+/* ===== 클릭 공개 토글 ===== */
+.text-editor-reveal{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--tm);
+  margin-top:4px;cursor:pointer;user-select:none;
+  padding:4px 8px;border-radius:8px;
+  background:rgba(var(--pk-rgb),.06);
+  border:1px solid rgba(var(--pk-rgb),.12);
+}
+.text-editor-reveal input{cursor:pointer;accent-color:var(--pk);}
+
+/* 슬라이드에서 클릭 공개 버튼으로 변환된 요소 */
+.reveal-toggle{
+  cursor:pointer;user-select:none;
+  transition:all .3s;
+}
+.reveal-toggle[data-reveal-state="hidden"]{
+  display:inline-block !important;
+  background:linear-gradient(135deg,var(--pk-m),var(--pk-a)) !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+  padding:6px 18px;border-radius:10px;
+  box-shadow:0 3px 10px rgba(var(--pk-rgb),.25);
+  font-size:clamp(14px, 1.3vw, 18px) !important;
+  letter-spacing:1px;
+  font-weight:700 !important;
+  filter:none !important;
+  text-shadow:none !important;
+  animation:revealPulse 2.5s ease-in-out infinite;
+}
+.reveal-toggle[data-reveal-state="hidden"]:hover{
+  transform:scale(1.05);
+}
+@keyframes revealPulse{
+  0%,100%{box-shadow:0 3px 10px rgba(var(--pk-rgb),.25);}
+  50%{box-shadow:0 5px 20px rgba(var(--pk-rgb),.45);}
+}
+.reveal-toggle[data-reveal-state="shown"]{
+  animation:revealShow .4s ease;
+}
+@keyframes revealShow{
+  from{opacity:0;transform:translateY(4px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@media (max-width:1400px){
+  .image-manager-panel{
+    top:22px;
+    left:22px;
+    width:360px;
+  }
+}
+
+</style></head>
+<body>
+<div class="pres" id="pres">
+<div class="export-toolbar">
+  <button type="button" onclick="downloadCurrentSlide()">현재 페이지 PNG</button>
+  <button type="button" onclick="downloadAllSlides()">전체 PNG 일괄저장</button>
+  <button type="button" class="secondary" onclick="toggleUi()">UI 숨기기/보이기</button>
+  <button type="button" class="secondary" onclick="toggleImageManager(true)">편집 패널 열기</button>
+  <span class="hint">PPT 16:9 · 1920×1080</span>
+</div>
+
+<aside class="image-manager-panel" id="imageManagerPanel" aria-hidden="true">
+  <div class="image-manager-header">
+    <div>
+      <div class="image-manager-title">편집 패널</div>
+      <div class="image-manager-desc">이미지 · 텍스트 · 테마 · 레이아웃 · 스티커를 편집할 수 있어요. 변경 사항은 이 브라우저에 저장됩니다.</div>
+      <div class="edit-panel-io">
+        <button type="button" class="edit-panel-io-btn" id="exportSettingsBtn" title="현재 설정을 JSON 파일로 저장">💾 내보내기</button>
+        <button type="button" class="edit-panel-io-btn" id="importSettingsBtn" title="JSON 파일을 불러와 설정 복원">📂 불러오기</button>
+        <input type="file" id="importSettingsInput" accept="application/json,.json" style="display:none;">
+        <label class="edit-panel-io-opt" title="설정 내보낼 때 업로드한 이미지도 함께 저장 (파일 크기 증가)">
+          <input type="checkbox" id="exportIncludeImages"> 이미지 포함
+        </label>
+        <button type="button" class="edit-panel-io-btn danger" id="resetAllSettingsBtn" title="모든 편집 내용 초기화 (이미지·텍스트·리스트·테마·레이아웃·스티커)">🗑 전체 초기화</button>
+      </div>
+    </div>
+    <button type="button" class="image-manager-close" onclick="toggleImageManager(false)" aria-label="편집 패널 닫기">✕</button>
+  </div>
+  <div class="edit-panel-main-tabs" id="editPanelMainTabs">
+    <button type="button" class="edit-panel-main-tab active" data-main-tab="slides">📑 슬라이드</button>
+    <button type="button" class="edit-panel-main-tab" data-main-tab="image">🖼 이미지</button>
+    <button type="button" class="edit-panel-main-tab" data-main-tab="text">✏️ 텍스트</button>
+    <button type="button" class="edit-panel-main-tab" data-main-tab="theme">🎨 테마</button>
+    <button type="button" class="edit-panel-main-tab" data-main-tab="layout">📐 레이아웃</button>
+    <button type="button" class="edit-panel-main-tab" data-main-tab="sticker">🌸 스티커</button>
+  </div>
+
+  <!-- 슬라이드 관리 섹션 (첫 active) -->
+  <div class="edit-panel-section active" data-main-section="slides">
+    <div class="layout-desc">슬라이드 순서 변경, 복사, 삭제. 기존 편집 내용도 함께 따라옵니다.</div>
+    <div class="slides-list" id="slidesList"></div>
+    <div class="slides-add-row">
+      <span class="slides-add-label">새 슬라이드 추가:</span>
+      <select id="slidesAddKind" class="slides-add-select"></select>
+      <button type="button" class="edit-panel-io-btn" id="slidesAddBtn">➕ 추가</button>
+    </div>
+  </div>
+
+  <!-- 이미지 편집 섹션 -->
+  <div class="edit-panel-section" data-main-section="image">
+    <div class="image-manager-tabs" id="imageManagerTabs"></div>
+    <div class="image-manager-body" id="imageManagerBody"></div>
+  </div>
+
+  <!-- 텍스트 편집 섹션 -->
+  <div class="edit-panel-section" data-main-section="text">
+    <div class="image-manager-tabs" id="textEditorTabs"></div>
+    <div class="image-manager-body" id="textEditorBody"></div>
+  </div>
+
+  <!-- 테마 편집 섹션 -->
+  <div class="edit-panel-section" data-main-section="theme">
+    <div class="theme-preset-row">
+      <div class="theme-preset-title">프리셋</div>
+      <div class="theme-preset-buttons" id="themePresets"></div>
+    </div>
+    <div class="theme-controls" id="themeControls"></div>
+    <button type="button" class="theme-reset-btn" id="themeResetBtn">기본 테마로 초기화</button>
+  </div>
+
+  <!-- 레이아웃 편집 섹션 -->
+  <div class="edit-panel-section" data-main-section="layout">
+    <div class="layout-desc">슬라이드 내부 요소들 사이의 간격을 조절합니다.</div>
+    <div class="image-manager-tabs" id="layoutTabs"></div>
+    <div class="image-manager-body" id="layoutBody"></div>
+    <button type="button" class="theme-reset-btn" id="layoutResetBtn">기본 레이아웃으로 초기화</button>
+  </div>
+
+  <!-- 스티커 편집 섹션 -->
+  <div class="edit-panel-section" data-main-section="sticker">
+    <div class="image-manager-tabs" id="stickerEditorTabs"></div>
+    <div class="sticker-quick-row">
+      <span class="sticker-quick-label">빠른 추가:</span>
+      <div class="sticker-quick-buttons" id="stickerQuickButtons"></div>
+    </div>
+    <div class="image-manager-body" id="stickerEditorBody"></div>
+  </div>
+
+  <!-- 패널 footer: 투명도 슬라이더 -->
+  <div class="edit-panel-footer">
+    <span class="edit-panel-footer-label">패널 투명도</span>
+    <input type="range" min="30" max="100" step="1" value="93" id="panelOpacitySlider" class="edit-panel-opacity-slider">
+    <span class="edit-panel-footer-value" id="panelOpacityValue">93%</span>
+  </div>
+</aside>
+
+<!-- ======== S1: 표지 ======== -->
+<div class="sl act" data-idx="0" data-slide-id="s_cover" data-slide-kind="cover">
+  <!-- Animated background -->
+  <div class="cover-bg">
+    <div class="stripe" style="left:-5%;animation-delay:0s;"></div>
+    <div class="stripe" style="left:15%;animation-delay:-2s;width:80px;"></div>
+    <div class="stripe" style="left:35%;animation-delay:-4s;width:100px;"></div>
+    <div class="stripe" style="left:55%;animation-delay:-1s;width:60px;"></div>
+    <div class="stripe" style="left:75%;animation-delay:-3s;width:90px;"></div>
+    <div class="stripe" style="left:90%;animation-delay:-5s;width:70px;"></div>
+    <!-- Sparkles -->
+    <div class="cover-sparkle" style="top:15%;left:52%;animation-delay:0s;"></div>
+    <div class="cover-sparkle" style="top:30%;right:18%;animation-delay:.6s;"></div>
+    <div class="cover-sparkle" style="top:60%;right:25%;animation-delay:1.2s;"></div>
+    <div class="cover-sparkle" style="top:45%;left:55%;animation-delay:1.8s;"></div>
+    <div class="cover-sparkle" style="top:75%;right:35%;animation-delay:.3s;"></div>
+    <div class="cover-sparkle" style="top:20%;right:30%;animation-delay:.9s;"></div>
+    <div class="cover-sparkle" style="bottom:25%;left:60%;animation-delay:1.5s;"></div>
+    <div class="cover-sparkle" style="top:10%;left:65%;animation-delay:0.4s;"></div>
+    <!-- Rings -->
+    <div class="cover-ring" style="top:5%;right:10%;width:120px;height:120px;"></div>
+    <div class="cover-ring" style="bottom:8%;left:45%;width:80px;height:80px;animation-delay:-2s;"></div>
+    <div class="cover-ring" style="top:35%;right:5%;width:60px;height:60px;animation-delay:-1s;"></div>
+  </div>
+  <!-- Triple frame -->
+  <div class="cover-frame"></div>
+  <div class="cover-corner ctl">🌸</div>
+  <div class="cover-corner ctr">🌸</div>
+  <div class="cover-corner cbl">🌸</div>
+  <div class="cover-corner cbr">🌸</div>
+  <!-- Floating stickers -->
+  <span class="stk cover-float" style="top:8%;right:12%;font-size:32px;z-index:4;animation-delay:0s;">🦊</span>
+  <span class="stk cover-float" style="bottom:12%;right:8%;font-size:26px;z-index:4;animation-delay:1s;">🎀</span>
+  <span class="stk cover-float" style="top:14%;right:28%;font-size:22px;z-index:4;animation-delay:.5s;">⭐</span>
+  <span class="stk cover-float" style="bottom:18%;right:22%;font-size:20px;z-index:4;animation-delay:1.5s;">💖</span>
+  <span class="stk cover-float" style="top:55%;right:6%;font-size:18px;z-index:4;animation-delay:.8s;">✨</span>
+  <span class="petal" style="top:12%;left:48%;font-size:22px;">🌸</span>
+  <span class="petal" style="bottom:15%;left:50%;animation-delay:2s;font-size:20px;">🌸</span>
+  <span class="petal" style="top:35%;right:40%;animation-delay:3.5s;font-size:16px;">🌸</span>
+  <!-- Blob deco -->
+  <svg class="deco-blob" style="top:-60px;right:-50px;width:320px;height:320px;opacity:.15;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <svg class="deco-blob" style="bottom:-70px;left:-50px;width:300px;height:300px;opacity:.12;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-a)"/></svg>
+  <svg class="deco-blob" style="top:30%;left:42%;width:200px;height:200px;opacity:.08;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <div class="lr">
+    <div class="cc" style="z-index:4;" data-placeholder="표지 이미지를 선택하세요"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3C/svg%3E" alt="표지 이미지" class="managed-slide-image" data-image-slot="cover-main" data-image-slide="0" data-image-label="표지 이미지" data-image-placeholder="표지 이미지를 선택하세요" data-empty="true"></div>
+    <div class="tc" style="z-index:4;">
+      <div class="tag" style="font-size:12px;padding:6px 22px;">✦ 0000. 00. 00 ✦</div>
+      <h1 class="cover-title">NAME<br>DEBUT</h1>
+      <div class="cover-sub-title">캐릭터 한 줄 소개</div>
+      <div class="cover-date">🌸 캐릭터를 소개합니다! 🌸</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S2: 프로필 ======== -->
+<div class="sl" data-idx="1" data-slide-id="s_profile" data-slide-kind="profile">
+  <div class="frame"><span class="corner tl">🦊</span><span class="corner tr">🌸</span><span class="corner bl">🌸</span><span class="corner br">🦊</span><div class="ribbon"><div class="ribbon-inner">PROFILE</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:13%;right:4%;font-size:16px;opacity:.2;z-index:3;">💖</span>
+  <span class="stk" style="bottom:11%;left:44%;font-size:14px;opacity:.2;z-index:3;">✨</span>
+  <span class="petal" style="top:7%;left:50%;">🌸</span>
+  <svg class="deco-blob" style="top:-40px;left:-40px;width:200px;height:200px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <div class="lr">
+    <div class="cc" data-placeholder="프로필 이미지를 선택하세요"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3C/svg%3E" alt="프로필 이미지" class="managed-slide-image" data-image-slot="profile-main" data-image-slide="1" data-image-label="프로필 이미지" data-image-placeholder="프로필 이미지를 선택하세요" data-empty="true"></div>
+    <div class="tc">
+      <div class="slbl">PROFILE</div>
+      <h2 class="sh">프로필</h2>
+      <div class="pr"><div class="pl">이름</div><div class="pv">캐릭터명</div></div>
+      <div class="pr"><div class="pl">키</div><div class="pv">000CM</div></div>
+      <div class="pr"><div class="pl">생일</div><div class="pv">00월 00일</div></div>
+      <div class="pr"><div class="pl">나이</div><div class="pv">비밀 🤫</div></div>
+      <div class="pr"><div class="pl">종족</div><div class="pv">종족명</div></div>
+      <div class="pr"><div class="pl">MBTI</div><div class="pv">XXXX</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S3: 호불호 ======== -->
+<div class="sl" data-idx="2" data-slide-id="s_likes" data-slide-kind="likes-dislikes">
+  <div class="frame"><span class="corner tl">💕</span><span class="corner tr">💦</span><span class="corner bl">🎀</span><span class="corner br">⭐</span><div class="ribbon"><div class="ribbon-inner">LIKE & DISLIKE</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:9%;left:4%;font-size:18px;opacity:.2;z-index:3;">🌸</span>
+  <span class="stk" style="bottom:9%;right:4%;font-size:16px;opacity:.2;z-index:3;">🌙</span>
+  <span class="petal" style="top:25%;right:3%;animation-delay:1s;font-size:13px;">✨</span>
+  <span class="petal" style="bottom:18%;left:3%;animation-delay:2s;">🌸</span>
+  <svg class="deco-blob" style="top:-30px;right:-30px;width:180px;height:180px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <svg class="deco-blob" style="bottom:-30px;left:-30px;width:160px;height:160px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="#e8e0f0"/></svg>
+  <div class="card-page">
+    <div class="card-section"><div class="card-section-header"><span class="card-section-icon">💕</span><span class="card-section-title">좋아하는 것</span></div>
+      <div class="icon-cards">
+        <div class="icon-card"><div class="icon-circle pk-bg">🎨</div><div class="ic-text">예시<br>좋아하는 것 1</div></div>
+        <div class="icon-card"><div class="icon-circle pk-bg">🎵</div><div class="ic-text">예시<br>좋아하는 것 2</div></div>
+      </div>
+    </div>
+    <div class="card-mid"><div class="card-mid-dot"></div><div class="card-mid-dot"></div><div class="card-mid-heart">♡</div><div class="card-mid-dot"></div><div class="card-mid-dot"></div></div>
+    <div class="card-section alt"><div class="card-section-header"><span class="card-section-icon">💦</span><span class="card-section-title">싫어하는 것</span></div>
+      <div class="icon-cards">
+        <div class="icon-card"><div class="icon-circle lv-bg">🥶</div><div class="ic-text">예시<br>싫어하는 것 1</div></div>
+        <div class="icon-card"><div class="icon-circle lv-bg">😫</div><div class="ic-text">예시<br>싫어하는 것 2</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S4: 장단점 ======== -->
+<div class="sl" data-idx="3" data-slide-id="s_pros" data-slide-kind="pros-cons">
+  <div class="frame"><span class="corner tl">🌟</span><span class="corner tr">😵‍💫</span><span class="corner bl">✨</span><span class="corner br">🎀</span><div class="ribbon"><div class="ribbon-inner">GOOD & BAD</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:10%;right:4%;font-size:14px;opacity:.2;z-index:3;">🦊</span>
+  <span class="stk" style="bottom:10%;left:4%;font-size:16px;opacity:.2;z-index:3;">💫</span>
+  <span class="petal" style="top:7%;left:28%;">🌸</span>
+  <svg class="deco-blob" style="top:-30px;left:38%;width:160px;height:160px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="#d0f0e8"/></svg>
+  <svg class="deco-blob" style="bottom:-30px;right:8%;width:150px;height:150px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="#ffe8d0"/></svg>
+  <div class="card-page">
+    <div class="card-section mint"><div class="card-section-header"><span class="card-section-icon">🌟</span><span class="card-section-title">장점</span></div>
+      <div class="icon-cards">
+        <div class="icon-card"><div class="icon-circle mn-bg">✨</div><div class="ic-text">예시<br>장점 1</div></div>
+        <div class="icon-card"><div class="icon-circle mn-bg">💪</div><div class="ic-text">예시<br>장점 2</div></div>
+        <div class="icon-card" style="width:100%;"><div class="icon-circle mn-bg">🎯</div><div class="ic-text">예시 장점 3</div></div>
+      </div>
+    </div>
+    <div class="card-mid"><div class="card-mid-dot"></div><div class="card-mid-dot"></div><div class="card-mid-heart">♡</div><div class="card-mid-dot"></div><div class="card-mid-dot"></div></div>
+    <div class="card-section peach"><div class="card-section-header"><span class="card-section-icon">😵‍💫</span><span class="card-section-title">단점</span></div>
+      <div class="icon-cards">
+        <div class="icon-card"><div class="icon-circle pc-bg">💤</div><div class="ic-text">예시<br>단점 1</div></div>
+        <div class="icon-card"><div class="icon-circle pc-bg">🫠</div><div class="ic-text">예시<br>단점 2</div></div>
+        <div class="icon-card" style="width:100%;"><div class="icon-circle pc-bg">🤯</div><div class="ic-text">예시 단점 3</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S5: 방송특징 (도넛 + 스케줄) ======== -->
+<div class="sl" data-idx="4" data-slide-id="s_contents" data-slide-kind="contents">
+  <div class="frame"><span class="corner tl">🎮</span><span class="corner tr">💬</span><span class="corner bl">🌸</span><span class="corner br">✨</span><div class="ribbon"><div class="ribbon-inner">CONTENTS & SCHEDULE</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:12%;left:5%;font-size:16px;opacity:.2;z-index:3;">🎀</span>
+  <span class="stk" style="bottom:10%;right:5%;font-size:14px;opacity:.2;z-index:3;">🦊</span>
+  <svg class="deco-blob" style="bottom:-40px;left:-30px;width:180px;height:180px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <div class="cl content-cl">
+    <div class="content-header" style="text-align:center;"><div class="slbl">BROADCAST FEATURES</div><h2 class="sh" style="margin-bottom:0;">방송 특징</h2></div>
+    <div class="content-split">
+      <!-- 왼쪽: 주 컨텐츠 도넛 -->
+      <div class="content-col">
+        <div class="content-subtitle">🎮 주 컨텐츠</div>
+        <div class="cw">
+          <div class="dw">
+            <svg viewBox="0 0 200 200" class="donut-svg">
+              <circle cx="100" cy="100" r="75" fill="none" stroke="var(--pk-m)" stroke-width="26"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#e8729a" stroke-width="26" stroke-dasharray="282.7 188.5" stroke-dashoffset="0" stroke-linecap="round" class="donut-seg"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#ffb088" stroke-width="26" stroke-dasharray="141.4 329.9" stroke-dashoffset="-282.7" stroke-linecap="round" class="donut-seg"/>
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#b8a9d4" stroke-width="26" stroke-dasharray="47.1 424.1" stroke-dashoffset="-424.1" stroke-linecap="round" class="donut-seg"/>
+            </svg>
+            <div class="dc"><div class="em">🎬</div><div class="lb">컨텐츠</div></div>
+          </div>
+          <div class="lg">
+            <div class="li"><div class="lc" style="background:#e8729a;"></div><span class="ll">카테고리 1</span><span class="lp">60%</span></div>
+            <div class="li"><div class="lc" style="background:#ffb088;"></div><span class="ll">카테고리 2</span><span class="lp">30%</span></div>
+            <div class="li"><div class="lc" style="background:#b8a9d4;"></div><span class="ll">카테고리 3</span><span class="lp">10%</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 오른쪽: 방송 시간 -->
+      <div class="content-col">
+        <div class="content-subtitle">⏰ 방송 시간</div>
+        <div class="sched-list">
+          <div class="sched-row"><span class="sched-lbl">평일</span><span class="sched-val">00 : 00 ~ 00 : 00</span></div>
+          <div class="sched-row"><span class="sched-lbl">주말</span><span class="sched-val">00 : 00 ~ 00 : 00</span></div>
+        </div>
+        <div class="weekdays">
+          <button type="button" class="wd-cell" data-day="mon" onclick="this.classList.toggle('on')">월</button>
+          <button type="button" class="wd-cell" data-day="tue" onclick="this.classList.toggle('on')">화</button>
+          <button type="button" class="wd-cell" data-day="wed" onclick="this.classList.toggle('on')">수</button>
+          <button type="button" class="wd-cell" data-day="thu" onclick="this.classList.toggle('on')">목</button>
+          <button type="button" class="wd-cell" data-day="fri" onclick="this.classList.toggle('on')">금</button>
+          <button type="button" class="wd-cell" data-day="sat" onclick="this.classList.toggle('on')">토</button>
+          <button type="button" class="wd-cell" data-day="sun" onclick="this.classList.toggle('on')">일</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S6: 방송목표 (체크리스트) ======== -->
+<div class="sl" data-idx="5" data-slide-id="s_goals" data-slide-kind="goals">
+  <div class="frame"><span class="corner tl">📋</span><span class="corner tr">🎯</span><span class="corner bl">✨</span><span class="corner br">🌸</span><div class="ribbon"><div class="ribbon-inner">GOALS 2026</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:12%;right:4%;font-size:14px;opacity:.2;z-index:3;">💪</span>
+  <span class="stk" style="bottom:10%;left:4%;font-size:16px;opacity:.2;z-index:3;">🎀</span>
+  <span class="petal" style="top:18%;left:6%;animation-delay:1s;">🌸</span>
+  <svg class="deco-blob" style="top:-30px;right:-30px;width:170px;height:170px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <div class="cl">
+    <div class="content-header" style="text-align:center;"><div class="slbl">GOALS</div><h2 class="sh" style="margin-bottom:0;">방송 목표</h2></div>
+    <div class="ckl">
+      <div class="cki" onclick="this.classList.toggle('chk')"><div class="ckb">✓</div><div class="cki-icon">🎯</div><div class="ckt">예시 목표 1</div></div>
+      <div class="cki" onclick="this.classList.toggle('chk')"><div class="ckb">✓</div><div class="cki-icon">🏆</div><div class="ckt">예시 목표 2</div></div>
+      <div class="cki" onclick="this.classList.toggle('chk')"><div class="ckb">✓</div><div class="cki-icon">🎬</div><div class="ckt">예시 목표 3</div></div>
+      <div class="cki" onclick="this.classList.toggle('chk')"><div class="ckb">✓</div><div class="cki-icon">💫</div><div class="ckt">예시 목표 4</div></div>
+      <div class="cki" onclick="this.classList.toggle('chk')"><div class="ckb">✓</div><div class="cki-icon">🚀</div><div class="ckt">예시 목표 5</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S7: QnA ======== -->
+<div class="sl" data-idx="6" data-slide-id="s_qna" data-slide-kind="qna">
+  <div class="frame"><span class="corner tl">💬</span><span class="corner tr">🌸</span><span class="corner bl">🦊</span><span class="corner br">✨</span><div class="ribbon"><div class="ribbon-inner">Q & A</div></div></div>
+  <div class="paper"></div>
+  <span class="stk" style="top:14%;right:46%;font-size:14px;opacity:.2;z-index:3;">❓</span>
+  <span class="stk" style="bottom:12%;left:46%;font-size:16px;opacity:.2;z-index:3;">🎀</span>
+  <span class="petal" style="top:8%;left:52%;">🌸</span>
+  <svg class="deco-blob" style="bottom:-50px;right:-30px;width:220px;height:220px;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  
+  <div class="lr">
+    <div class="cc" data-placeholder="Q&A 이미지를 선택하세요"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3C/svg%3E" alt="Q&A 이미지" class="managed-slide-image" data-image-slot="qna-main" data-image-slide="6" data-image-label="Q&A 이미지" data-image-placeholder="Q&A 이미지를 선택하세요" data-empty="true"></div>
+    <div class="tc" style="align-items: center; text-align: center;">
+      <h2 class="qb">Q & A</h2>
+      <div class="qs" style="font-size: 20px; margin-top: 15px; color: var(--td);">무엇이든 물어보세요!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== S8: 마무리 ======== -->
+<div class="sl" data-idx="7" data-slide-id="s_thanks" data-slide-kind="thanks" style="background:linear-gradient(160deg,var(--pk-s) 0%,#fff 40%,var(--pk-s) 100%);">
+  <div class="cover-frame"></div>
+  <div class="cover-corner ctl">🌸</div><div class="cover-corner ctr">💖</div>
+  <div class="cover-corner cbl">✨</div><div class="cover-corner cbr">🌸</div>
+  <span class="stk cover-float" style="top:16%;left:10%;font-size:24px;z-index:4;">⭐</span>
+  <span class="stk cover-float" style="top:14%;right:10%;font-size:22px;z-index:4;animation-delay:.7s;">🦊</span>
+  <span class="stk cover-float" style="bottom:16%;left:14%;font-size:20px;z-index:4;animation-delay:1.4s;">🎀</span>
+  <span class="stk cover-float" style="bottom:18%;right:14%;font-size:24px;z-index:4;animation-delay:.3s;">💖</span>
+  <span class="petal" style="top:22%;left:18%;font-size:20px;">🌸</span>
+  <span class="petal" style="top:28%;right:18%;animation-delay:1.5s;font-size:18px;">🌸</span>
+  <span class="petal" style="bottom:22%;left:32%;animation-delay:3s;font-size:16px;">🌸</span>
+  <svg class="deco-blob" style="top:-40px;left:30%;width:180px;height:180px;opacity:.15;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="var(--pk-m)"/></svg>
+  <div class="cl" style="z-index:4;">
+    <div class="ts">THANK YOU</div>
+    <div class="tm-txt">감사합니다!</div>
+    <div class="td-txt">🌸 🦊 🎀 🌸</div>
+  </div>
+</div>
+
+</div>
+<button class="na np" onclick="navigate(-1)">◂</button>
+<button class="na nn" onclick="navigate(1)">▸</button>
+<div class="pn" id="pn">1 / 8</div>
+<div class="nb" id="nb"></div>
+
+<script>
+const nb=document.getElementById('nb');
+let cur=0;
+// === 슬라이드 ID + Kind 시스템 (옵션 A 풀 리팩터) ===
+// 각 슬라이드는 영구 ID(data-slide-id)와 종류(data-slide-kind)로 식별됨
+// 인덱스(data-idx)는 순서 변경 시마다 재할당되는 보조 값일 뿐
+
+// kind별 표시 이름 (편집 패널에서 탭 라벨로 사용)
+const kindTitles = {
+  'cover':         '표지',
+  'profile':       '프로필',
+  'likes-dislikes':'호불호',
+  'pros-cons':     '장단점',
+  'contents':      '방송특징',
+  'goals':         '방송목표',
+  'qna':           'QNA',
+  'thanks':        '마무리'
+};
+// kind별 원본 슬라이드 ID (마이그레이션·초기 복원에서 사용 — 이 위치에 일찍 정의 필수)
+const ORIGINAL_SLIDE_IDS = {
+  'cover':'s_cover','profile':'s_profile','likes-dislikes':'s_likes',
+  'pros-cons':'s_pros','contents':'s_contents','goals':'s_goals',
+  'qna':'s_qna','thanks':'s_thanks'
+};
+
+// 현재 슬라이드 순서 (ID 배열). DOM 순서와 동기화됨
+let slideOrder = [];
+
+function refreshSlideOrder(){
+  slideOrder = Array.from(document.querySelectorAll('.sl')).map(el => el.dataset.slideId);
+}
+function getSlideById(id){
+  return document.querySelector(`.sl[data-slide-id="${id}"]`);
+}
+function getSlideKind(id){
+  const el = getSlideById(id);
+  return el ? el.dataset.slideKind : null;
+}
+// 슬라이드별로 1-based 표시 번호와 함께 라벨 반환 (예: "3. 호불호")
+function getSlideLabel(id){
+  const idx = slideOrder.indexOf(id);
+  const kind = getSlideKind(id);
+  const title = kindTitles[kind] || kind || '슬라이드';
+  return `${idx + 1}. ${title}`;
+}
+// 같은 kind의 슬라이드가 여러 개일 때 (#2, #3 등 표시)
+function getSlideLabelWithDup(id){
+  const idx = slideOrder.indexOf(id);
+  const kind = getSlideKind(id);
+  const title = kindTitles[kind] || kind || '슬라이드';
+  // 같은 kind인 슬라이드 중 몇 번째인지
+  const sameKindIds = slideOrder.filter(sid => getSlideKind(sid) === kind);
+  const dupIdx = sameKindIds.indexOf(id);
+  const suffix = sameKindIds.length > 1 ? ` #${dupIdx + 1}` : '';
+  return `${idx + 1}. ${title}${suffix}`;
+}
+
+// 초기 1회 호출
+refreshSlideOrder();
+
+// 호환용: 기존 slideTitles 객체를 인덱스(string)로 조회하던 코드들이 있어서
+// 동적 Proxy로 대체 — 인덱스 키로 조회하면 현재 순서 기반 라벨 반환
+const slideTitles = new Proxy({'*':'📐 전체'}, {
+  get(target, prop){
+    if(prop === '*') return target['*'];
+    if(typeof prop === 'string' && /^\d+$/.test(prop)){
+      const id = slideOrder[Number(prop)];
+      return id ? getSlideLabelWithDup(id) : `슬라이드 ${Number(prop)+1}`;
+    }
+    return target[prop];
+  }
+});
+
+
+// 슬라이드 목록을 매번 새로 조회 (DOM이 변할 수 있으므로)
+function getSlides(){ return document.querySelectorAll('.sl'); }
+function getTot(){ return getSlides().length; }
+
+// 네비 점들을 현재 슬라이드 수에 맞춰 재생성
+function rebuildNavDots(){
+  nb.innerHTML='';
+  const tot = getTot();
+  for(let i=0;i<tot;i++){
+    const d=document.createElement('button');
+    d.className='nd'+(i===cur?' act':'');
+    d.onclick=()=>goTo(i);
+    nb.appendChild(d);
+  }
+}
+rebuildNavDots();
+
+// data-idx를 현재 DOM 순서에 맞춰 재할당 (호환용 - captureSlide 등이 사용)
+function reassignSlideIndices(){
+  getSlides().forEach((el, i)=>{ el.dataset.idx = String(i); });
+  refreshSlideOrder(); // ID 순서도 동기화
+}
+reassignSlideIndices();
+
+function goTo(i){
+  const slides = getSlides();
+  const tot = slides.length;
+  if(i<0||i>=tot)return;
+  if(slides[cur]) slides[cur].classList.remove('act');
+  if(nb.children[cur]) nb.children[cur].classList.remove('act');
+  cur=i;
+  slides[cur].classList.add('act');
+  if(nb.children[cur]) nb.children[cur].classList.add('act');
+  const pn = document.getElementById('pn');
+  if(pn) pn.textContent=(cur+1)+' / '+tot;
+}
+function navigate(d){const n=cur+d;if(n>=0&&n<getTot())goTo(n);}
+  document.querySelectorAll('.paper').forEach(paper => {
+      const stickers = [
+          '<div class="sticker" style="top: -20px; left: -20px; transform: rotate(-15deg); font-size: 50px;">🎀</div>',
+          '<div class="sticker" style="bottom: 10%; right: -25px; transform: rotate(10deg); font-size: 40px;">⭐</div>',
+          '<div class="sticker" style="top: 20%; right: -15px; font-size: 30px;">✨</div>',
+          '<div class="sticker" style="bottom: 20%; left: -15px; font-size: 35px;">🌸</div>'
+      ];
+      paper.innerHTML += stickers.join('');
+  });
+
+const IMAGE_STORAGE_KEY='soha-ppt-managed-images-v1';
+const IMAGE_PANEL_STORAGE_KEY='soha-ppt-image-panel-open-v1';
+const transparentPlaceholder = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3C/svg%3E";
+const imageSlots = Array.from(document.querySelectorAll('.managed-slide-image'));
+let imageState = loadImageState();
+
+function loadImageState(){
+  try{
+    return JSON.parse(localStorage.getItem(IMAGE_STORAGE_KEY) || '{}');
+  }catch(e){
+    return {};
+  }
+}
+function saveImageState(){
+  localStorage.setItem(IMAGE_STORAGE_KEY, JSON.stringify(imageState));
+}
+function setManagedImage(img, src){
+  if(src){
+    img.src = src;
+    img.dataset.empty = 'false';
+  }else{
+    img.src = transparentPlaceholder;
+    img.dataset.empty = 'true';
+  }
+}
+function applyStoredImages(){
+  imageSlots.forEach(img=>{
+    const slot = img.dataset.imageSlot;
+    setManagedImage(img, imageState[slot] || '');
+  });
+}
+function buildImageManager(){
+  const tabsEl = document.getElementById('imageManagerTabs');
+  const bodyEl = document.getElementById('imageManagerBody');
+  const grouped = {};
+  imageSlots.forEach(img=>{
+    const slide = img.dataset.imageSlide;
+    if(!grouped[slide]) grouped[slide] = [];
+    grouped[slide].push(img);
+  });
+  const slides = Object.keys(grouped).sort((a,b)=>Number(a)-Number(b));
+  slides.forEach((slide, slideIndex)=>{
+    const tab = document.createElement('button');
+    tab.type='button';
+    tab.className='image-manager-tab' + (slideIndex===0?' active':'');
+    tab.dataset.slide = slide;
+    tab.textContent = slideTitles[slide] || `슬라이드 ${Number(slide)+1}`;
+    tab.onclick=()=>activateImageManagerTab(slide);
+    tabsEl.appendChild(tab);
+
+    const group = document.createElement('div');
+    group.className='image-manager-group' + (slideIndex===0?' active':'');
+    group.dataset.slide = slide;
+
+    grouped[slide].forEach((img, slotIndex)=>{
+      const slot = img.dataset.imageSlot;
+      const card = document.createElement('div');
+      card.className='image-manager-card';
+
+      const inputId = `image-slot-input-${slot}`;
+      card.innerHTML = `
+        <div class="image-manager-card-head">
+          <div>
+            <div class="image-manager-card-title">${img.dataset.imageLabel || `이미지 ${slotIndex+1}`}</div>
+            <div class="image-manager-card-sub">슬라이드 ${Number(slide)+1}의 이미지 요소</div>
+          </div>
+        </div>
+        <div class="image-manager-actions">
+          <label class="image-manager-file" for="${inputId}">이미지 선택</label>
+          <button type="button" class="image-manager-clear">이미지 제거</button>
+          <button type="button" class="image-manager-jump">해당 페이지 보기</button>
+        </div>
+        <input class="image-manager-hidden-input" id="${inputId}" type="file" accept="image/*">
+        <div class="image-manager-status">${imageState[slot] ? '선택 완료' : '현재 이미지 없음'}</div>
+      `;
+
+      const input = card.querySelector('.image-manager-hidden-input');
+      const clearBtn = card.querySelector('.image-manager-clear');
+      const jumpBtn = card.querySelector('.image-manager-jump');
+      const status = card.querySelector('.image-manager-status');
+
+      input.addEventListener('change', event=>{
+        const [file] = event.target.files || [];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ()=>{
+          imageState[slot] = reader.result;
+          // 먼저 화면에 반영 (저장 실패와 무관하게 현재 세션에서는 보이도록)
+          setManagedImage(img, reader.result);
+          // 그 다음 localStorage 저장 시도 (용량 초과 시에도 앱이 계속 동작)
+          try {
+            saveImageState();
+            status.textContent = `선택 완료 · ${file.name}`;
+          } catch(err) {
+            console.warn('localStorage quota exceeded for image:', err);
+            status.textContent = `선택 완료 · ${file.name} ⚠️ (이미지가 커서 새로고침 시 초기화됨)`;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      clearBtn.addEventListener('click', ()=>{
+        delete imageState[slot];
+        saveImageState();
+        setManagedImage(img, '');
+        input.value = '';
+        status.textContent = '현재 이미지 없음';
+      });
+
+      jumpBtn.addEventListener('click', ()=>{
+        goTo(Number(slide));
+        toggleImageManager(true);
+      });
+
+      group.appendChild(card);
+    });
+
+    bodyEl.appendChild(group);
+  });
+}
+function activateImageManagerTab(slide){
+  document.querySelectorAll('.image-manager-tab').forEach(tab=>{
+    tab.classList.toggle('active', tab.dataset.slide===String(slide));
+  });
+  document.querySelectorAll('.image-manager-group').forEach(group=>{
+    group.classList.toggle('active', group.dataset.slide===String(slide));
+  });
+}
+function toggleImageManager(force){
+  const panel = document.getElementById('imageManagerPanel');
+  const toggle = document.getElementById('imageManagerToggle');
+  const shouldOpen = typeof force === 'boolean' ? force : !panel.classList.contains('open');
+  panel.classList.toggle('open', shouldOpen);
+  panel.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+  if(toggle) toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+  localStorage.setItem(IMAGE_PANEL_STORAGE_KEY, shouldOpen ? 'open' : 'closed');
+}
+applyStoredImages();
+buildImageManager();
+if(localStorage.getItem(IMAGE_PANEL_STORAGE_KEY)==='open'){
+  toggleImageManager(true);
+}
+
+// 슬라이드 네비게이션 차단 조건: 입력 중이거나 편집 패널이 열려있을 때
+function isEditingContext(){
+  const ae = document.activeElement;
+  if(ae){
+    const tag = ae.tagName;
+    if(tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || ae.isContentEditable){
+      return true;
+    }
+  }
+  const panel = document.getElementById('imageManagerPanel');
+  if(panel && panel.classList.contains('open')) return true;
+  return false;
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){toggleImageManager(false); return;}
+  if(isEditingContext()) return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();navigate(1);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();navigate(-1);}
+});
+
+/* ============================================
+   메인 탭 전환 (이미지 / 텍스트 / 테마 / 스티커)
+============================================ */
+document.querySelectorAll('.edit-panel-main-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = btn.dataset.mainTab;
+    document.querySelectorAll('.edit-panel-main-tab').forEach(b=>{
+      b.classList.toggle('active', b.dataset.mainTab===target);
+    });
+    document.querySelectorAll('.edit-panel-section').forEach(sec=>{
+      sec.classList.toggle('active', sec.dataset.mainSection===target);
+    });
+  });
+});
+
+/* ============================================
+   텍스트 편집
+============================================ */
+const TEXT_STORAGE_KEY = 'soha-ppt-text-overrides-v1';
+// 슬라이드별 편집 가능한 텍스트 슬롯 정의
+const textConfig = {
+  'cover': [
+    {id:'cover-tag', label:'날짜 태그', selector:'.sl[data-slide-kind="cover"] .tag'},
+    {id:'cover-title', label:'메인 타이틀', selector:'.sl[data-slide-kind="cover"] .cover-title', multiline:true, hint:'Enter로 줄바꿈 (예: SOHA ⏎ DEBUT)'},
+    {id:'cover-sub', label:'서브 타이틀', selector:'.sl[data-slide-kind="cover"] .cover-sub-title'},
+    {id:'cover-date', label:'하단 배너', selector:'.sl[data-slide-kind="cover"] .cover-date'}
+  ],
+  'profile': [
+    {id:'profile-label', label:'섹션 라벨', selector:'.sl[data-slide-kind="profile"] .slbl'},
+    {id:'profile-title', label:'섹션 제목', selector:'.sl[data-slide-kind="profile"] .sh'},
+    {id:'profile-name', label:'이름', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[0]},
+    {id:'profile-height', label:'키', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[1]},
+    {id:'profile-birthday', label:'생일', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[2]},
+    {id:'profile-age', label:'나이', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[3]},
+    {id:'profile-species', label:'종족', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[4]},
+    {id:'profile-mbti', label:'MBTI', selectorFn:(slideEl)=>slideEl.querySelectorAll('.pr .pv')[5]}
+  ],
+  'likes-dislikes': [
+    {id:'like-title', label:'좌측 섹션 제목', selector:'.sl[data-slide-kind="likes-dislikes"] .card-section:nth-child(1) .card-section-title'},
+    {id:'dislike-title', label:'우측 섹션 제목', selector:'.sl[data-slide-kind="likes-dislikes"] .card-section:nth-child(3) .card-section-title'}
+  ],
+  'pros-cons': [
+    {id:'pros-title', label:'장점 섹션 제목', selector:'.sl[data-slide-kind="pros-cons"] .card-section:nth-child(1) .card-section-title'},
+    {id:'cons-title', label:'단점 섹션 제목', selector:'.sl[data-slide-kind="pros-cons"] .card-section:nth-child(3) .card-section-title'}
+  ],
+  'contents': [
+    {id:'contents-label', label:'섹션 라벨', selector:'.sl[data-slide-kind="contents"] .slbl'},
+    {id:'contents-title', label:'섹션 제목', selector:'.sl[data-slide-kind="contents"] .sh'},
+    {id:'contents-left-sub', label:'좌측 부제목', selectorFn:(slideEl)=>slideEl.querySelectorAll('.content-subtitle')[0]},
+    {id:'contents-1-name', label:'주 컨텐츠 1 이름', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .ll')[0]},
+    {id:'contents-1-pct', label:'주 컨텐츠 1 비율 (도넛 연동)', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .lp')[0]},
+    {id:'contents-2-name', label:'주 컨텐츠 2 이름', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .ll')[1]},
+    {id:'contents-2-pct', label:'주 컨텐츠 2 비율 (도넛 연동)', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .lp')[1]},
+    {id:'contents-3-name', label:'주 컨텐츠 3 이름', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .ll')[2]},
+    {id:'contents-3-pct', label:'주 컨텐츠 3 비율 (도넛 연동)', selectorFn:(slideEl)=>slideEl.querySelectorAll('.li .lp')[2]},
+    {id:'contents-right-sub', label:'우측 부제목', selectorFn:(slideEl)=>slideEl.querySelectorAll('.content-subtitle')[1]},
+    {id:'sched-weekday', label:'평일 방송 시간', selectorFn:(slideEl)=>slideEl.querySelectorAll('.sched-val')[0], hint:'예: 20:00 ~ 23:00'},
+    {id:'sched-weekend', label:'주말 방송 시간', selectorFn:(slideEl)=>slideEl.querySelectorAll('.sched-val')[1], hint:'예: 14:00 ~ 18:00'}
+  ],
+  'goals': [
+    {id:'goals-label', label:'섹션 라벨', selector:'.sl[data-slide-kind="goals"] .slbl'},
+    {id:'goals-title', label:'섹션 제목', selector:'.sl[data-slide-kind="goals"] .sh'}
+  ],
+  'qna': [
+    {id:'qna-title', label:'Q&A 타이틀', selector:'.sl[data-slide-kind="qna"] .qb'},
+    {id:'qna-sub', label:'Q&A 서브 문구', selector:'.sl[data-slide-kind="qna"] .qs'}
+  ],
+  'thanks': [
+    {id:'thanks-top', label:'상단 라벨', selector:'.sl[data-slide-kind="thanks"] .ts'},
+    {id:'thanks-main', label:'메인 메시지', selector:'.sl[data-slide-kind="thanks"] .tm-txt'},
+    {id:'thanks-deco', label:'하단 이모지', selector:'.sl[data-slide-kind="thanks"] .td-txt'}
+  ]
+};
+
+let textOverrides = (()=>{ try{return JSON.parse(localStorage.getItem(TEXT_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+
+function saveTextOverrides(){
+  try{localStorage.setItem(TEXT_STORAGE_KEY, JSON.stringify(textOverrides));}catch(e){console.warn(e);}
+}
+// 슬롯의 셀렉터를 슬라이드 root 기준 상대 셀렉터로 자동 변환
+// 예: '.sl[data-slide-kind="cover"] .tag' → 슬라이드 root 안의 '.tag'
+function makeSlideRelativeSelector(selector){
+  if(!selector) return null;
+  // .sl[data-slide-kind="..."] 또는 .sl[data-idx="..."] 부분 제거
+  return selector.replace(/^\.sl\[[^\]]+\]\s*/, '').trim() || '*';
+}
+function resolveTextElement(slot, slideEl){
+  if(slideEl){
+    // 슬라이드 단위 격리: relative selector 또는 selectorFn(slideEl) 사용
+    if(slot.selectorFn){
+      // selectorFn이 slideEl 인자를 받는지 확인 (length로 판별 어려우니 try)
+      const r = slot.selectorFn(slideEl);
+      if(r) return r;
+    }
+    if(slot.selector){
+      const rel = makeSlideRelativeSelector(slot.selector);
+      return slideEl.querySelector(rel);
+    }
+    return null;
+  }
+  // 기존 전역 동작 (호환)
+  if(slot.selectorFn) return slot.selectorFn();
+  return document.querySelector(slot.selector);
+}
+function getDefaultText(slot, slideEl){
+  const el = resolveTextElement(slot, slideEl);
+  if(!el) return '';
+  if(slot.multiline && slot.id==='cover-title'){
+    return el.innerHTML.replace(/<br\s*\/?>/gi, '\n').trim();
+  }
+  return el.textContent;
+}
+function applyTextToElement(slot, value, slideEl){
+  const el = resolveTextElement(slot, slideEl);
+  if(!el) return;
+  if(slot.id==='cover-title'){
+    el.innerHTML = value.replace(/\n/g, '<br>');
+  }else{
+    el.textContent = value;
+  }
+}
+// 모든 'contents' kind 슬라이드의 도넛 차트를 자기 슬라이드 .lp 값들로부터 재계산
+function updateDonut(){
+  const r = 75;
+  const circumference = 2 * Math.PI * r;
+  document.querySelectorAll('.sl[data-slide-kind="contents"]').forEach(slide => {
+    const svg = slide.querySelector('.donut-svg');
+    if(!svg) return;
+    const segs = svg.querySelectorAll('.donut-seg');
+    const items = slide.querySelectorAll('.li');
+    let offset = 0;
+    items.forEach((item, i)=>{
+      const seg = segs[i];
+      if(!seg) return;
+      const pctText = (item.querySelector('.lp').textContent||'').replace('%','').trim();
+      const pct = Math.max(0, Math.min(100, parseFloat(pctText)||0));
+      const len = (pct/100) * circumference;
+      seg.setAttribute('stroke-dasharray', `${len.toFixed(2)} ${(circumference-len).toFixed(2)}`);
+      seg.setAttribute('stroke-dashoffset', (-offset).toFixed(2));
+      offset += len;
+    });
+  });
+}
+
+/* ============================================
+   동적 리스트 (호불호 / 장단점 / 방송목표)
+============================================ */
+const LIST_STORAGE_KEY = 'soha-ppt-lists-v1';
+const listConfig = [
+  {id:'likes',    slide:'likes-dislikes', label:'좋아하는 것 항목', containerSelector:'.sl[data-slide-kind="likes-dislikes"] .card-section:nth-child(1) .icon-cards', kind:'icon-card', bgClass:'pk-bg', multiline:true, defaultIcon:'💕', defaultText:'예시 좋아하는 것'},
+  {id:'dislikes', slide:'likes-dislikes', label:'싫어하는 것 항목', containerSelector:'.sl[data-slide-kind="likes-dislikes"] .card-section:nth-child(3) .icon-cards', kind:'icon-card', bgClass:'lv-bg', multiline:true, defaultIcon:'💦', defaultText:'예시 싫어하는 것'},
+  {id:'pros',     slide:'pros-cons', label:'장점 항목',       containerSelector:'.sl[data-slide-kind="pros-cons"] .card-section:nth-child(1) .icon-cards', kind:'icon-card', bgClass:'mn-bg', multiline:true, oddLastWide:true, defaultIcon:'🌟', defaultText:'예시 장점'},
+  {id:'cons',     slide:'pros-cons', label:'단점 항목',       containerSelector:'.sl[data-slide-kind="pros-cons"] .card-section:nth-child(3) .icon-cards', kind:'icon-card', bgClass:'pc-bg', multiline:true, oddLastWide:true, defaultIcon:'😵‍💫', defaultText:'예시 단점'},
+  {id:'goals',    slide:'goals', label:'방송 목표 항목',   containerSelector:'.sl[data-slide-kind="goals"] .ckl', kind:'check', multiline:false, defaultIcon:'🎯', defaultText:'예시 목표'}
+];
+let listState = (()=>{try{return JSON.parse(localStorage.getItem(LIST_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+const listInitial = {};
+
+function saveListState(){try{localStorage.setItem(LIST_STORAGE_KEY, JSON.stringify(listState));}catch(e){console.warn(e);}}
+
+// 리스트 키: "<def.id>:<slideId>"
+function listStateKey(defId, slideId){ return `${defId}:${slideId}`; }
+
+// 마이그레이션
+(function migrateListState(){
+  try{
+    let changed = false;
+    Object.keys(listState).forEach(k=>{
+      if(k.includes(':')) return;
+      const def = listConfig.find(d => d.id === k);
+      if(def){
+        const sid = ORIGINAL_SLIDE_IDS[def.slide];
+        if(sid){
+          const newKey = listStateKey(k, sid);
+          if(!(newKey in listState)){
+            listState[newKey] = listState[k];
+            changed = true;
+          }
+          delete listState[k];
+          changed = true;
+        }
+      }
+    });
+    if(changed) saveListState();
+  }catch(e){ console.warn('[migrateListState] 실패, 무시:', e); }
+})();
+
+// def.containerSelector를 슬라이드 root 기준 상대 셀렉터로
+function makeListRelativeContainer(selector){
+  return selector.replace(/^\.sl\[[^\]]+\]\s*/, '').trim() || '*';
+}
+
+// 초기 HTML로부터 리스트 항목 추출 (슬라이드 root 안에서)
+function extractInitialItems(def, slideEl){
+  const rel = makeListRelativeContainer(def.containerSelector);
+  const container = slideEl ? slideEl.querySelector(rel) : document.querySelector(def.containerSelector);
+  if(!container) return [];
+  return Array.from(container.children).map(child=>{
+    if(def.kind==='icon-card'){
+      const icon = child.querySelector('.icon-circle');
+      const text = child.querySelector('.ic-text');
+      return {
+        icon: icon ? icon.textContent.trim() : '',
+        text: text ? text.innerHTML.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim() : ''
+      };
+    }else if(def.kind==='check'){
+      const icon = child.querySelector('.cki-icon');
+      const text = child.querySelector('.ckt');
+      return {
+        icon: icon ? icon.textContent.trim() : '',
+        text: text ? text.textContent.trim() : '',
+        checkable: true
+      };
+    }
+    return {icon:'',text:''};
+  });
+}
+
+function getListItems(def, slideId){
+  const key = listStateKey(def.id, slideId);
+  if(listState[key]) return listState[key];
+  // initial: 슬라이드 ID 기반 캐시 키
+  const initKey = key;
+  if(listInitial[initKey]) return listInitial[initKey];
+  // fallback: 같은 def의 다른 슬라이드의 초기값 (복사된 슬라이드)
+  return listInitial[listStateKey(def.id, ORIGINAL_SLIDE_IDS[def.slide])] || [];
+}
+function setListItems(def, slideId, items){
+  listState[listStateKey(def.id, slideId)] = items;
+  saveListState();
+}
+
+function renderList(def, slideEl){
+  if(slideEl){
+    // 슬라이드별 렌더
+    _renderListInSlide(def, slideEl);
+  }else{
+    // 모든 같은 kind 슬라이드에 대해 렌더
+    document.querySelectorAll(`.sl[data-slide-kind="${def.slide}"]`).forEach(sEl => {
+      _renderListInSlide(def, sEl);
+    });
+  }
+}
+function _renderListInSlide(def, slideEl){
+  const rel = makeListRelativeContainer(def.containerSelector);
+  const container = slideEl.querySelector(rel);
+  if(!container) return;
+  const sid = slideEl.dataset.slideId;
+  const items = getListItems(def, sid);
+  container.innerHTML = '';
+  items.forEach((item, idx)=>{
+    const isLast = idx === items.length-1;
+    const fullWidth = def.oddLastWide && items.length%2===1 && isLast;
+    const isRevealed = !!item.reveal;
+
+    if(def.kind==='icon-card'){
+      const card = document.createElement('div');
+      card.className = 'icon-card';
+      if(fullWidth) card.style.width = '100%';
+      const textHtml = (item.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+      const iconHtml = (item.icon||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+      if(isRevealed){
+        // 숨김 상태로 시작. 카드 전체를 클릭하면 내부 공개
+        card.classList.add('item-reveal');
+        card.dataset.revealState = 'hidden';
+        card.innerHTML = `<div class="icon-circle ${def.bgClass}">👀</div><div class="ic-text">클릭해서 확인!</div>`;
+        card.addEventListener('click', ()=>{
+          if(card.dataset.revealState === 'hidden'){
+            card.innerHTML = `<div class="icon-circle ${def.bgClass}">${iconHtml}</div><div class="ic-text">${textHtml}</div>`;
+            card.dataset.revealState = 'shown';
+          }else{
+            card.innerHTML = `<div class="icon-circle ${def.bgClass}">👀</div><div class="ic-text">클릭해서 확인!</div>`;
+            card.dataset.revealState = 'hidden';
+          }
+        });
+      }else{
+        card.innerHTML = `<div class="icon-circle ${def.bgClass}">${iconHtml}</div><div class="ic-text">${textHtml}</div>`;
+      }
+      container.appendChild(card);
+    }else if(def.kind==='check'){
+      const cki = document.createElement('div');
+      cki.className = 'cki';
+      const isCheckable = item.checkable !== false; // 기본 true
+      if(!isCheckable) cki.classList.add('cki-locked');
+      const safeText = (item.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const safeIcon = (item.icon||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+      if(isRevealed){
+        cki.classList.add('item-reveal');
+        cki.dataset.revealState = 'hidden';
+        cki.innerHTML = `<div class="ckb">✓</div><div class="cki-icon">👀</div><div class="ckt">클릭해서 확인!</div>`;
+        cki.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          if(cki.dataset.revealState === 'hidden'){
+            cki.innerHTML = `<div class="ckb">✓</div><div class="cki-icon">${safeIcon}</div><div class="ckt">${safeText}</div>`;
+            cki.dataset.revealState = 'shown';
+            // 공개 후엔 체크 가능 여부에 따라 chk 토글 기능 부여
+            if(isCheckable){
+              cki.addEventListener('click', ev=>cki.classList.toggle('chk'));
+            }
+          }else{
+            cki.innerHTML = `<div class="ckb">✓</div><div class="cki-icon">👀</div><div class="ckt">클릭해서 확인!</div>`;
+            cki.dataset.revealState = 'hidden';
+          }
+        });
+      }else{
+        if(isCheckable){
+          cki.addEventListener('click', ()=> cki.classList.toggle('chk'));
+        }
+        cki.innerHTML = `<div class="ckb">✓</div><div class="cki-icon">${safeIcon}</div><div class="ckt">${safeText}</div>`;
+      }
+      container.appendChild(cki);
+    }
+  });
+}
+function captureAllInitialLists(){
+  document.querySelectorAll('.sl').forEach(slideEl=>{
+    const sid = slideEl.dataset.slideId;
+    const kind = slideEl.dataset.slideKind;
+    listConfig.filter(def => def.slide === kind).forEach(def=>{
+      const initKey = listStateKey(def.id, sid);
+      if(!(initKey in listInitial)){
+        listInitial[initKey] = extractInitialItems(def, slideEl);
+      }
+    });
+  });
+}
+function renderAllLists(){
+  listConfig.forEach(def => renderList(def));
+}
+
+/* ============================================
+   클릭 공개(Reveal) 토글 — MBTI처럼 숨겼다 공개
+============================================ */
+const REVEAL_STORAGE_KEY = 'soha-ppt-reveals-v1';
+let revealState = (()=>{try{return JSON.parse(localStorage.getItem(REVEAL_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+function saveRevealState(){try{localStorage.setItem(REVEAL_STORAGE_KEY, JSON.stringify(revealState));}catch(e){console.warn(e);}}
+
+// reveal 키 형식: "<slideId>:<slot.id>"
+function revealStateKey(slideId, slotId){ return `${slideId}:${slotId}`; }
+
+// 마이그레이션: 단독 키를 원본 슬라이드 prefix로
+(function migrateRevealKeys(){
+  try{
+    let changed = false;
+    Object.keys(revealState).forEach(k=>{
+      if(k.includes(':')) return;
+      for(const [kind, slots] of Object.entries(textConfig)){
+        if(slots.some(s => s.id === k)){
+          const sid = ORIGINAL_SLIDE_IDS[kind];
+          if(sid){
+            const newKey = revealStateKey(sid, k);
+            if(!(newKey in revealState)){
+              revealState[newKey] = revealState[k];
+              changed = true;
+            }
+            delete revealState[k];
+            changed = true;
+          }
+          break;
+        }
+      }
+    });
+    if(changed) saveRevealState();
+  }catch(e){ console.warn('[migrateRevealKeys] 실패, 무시:', e); }
+})();
+
+function currentTextOf(slot, slideEl){
+  if(slideEl){
+    const sid = slideEl.dataset.slideId;
+    const key = textKey(sid, slot.id);
+    if(textOverrides[key] !== undefined) return textOverrides[key];
+    return textDefaults[key] !== undefined ? textDefaults[key] : '';
+  }
+  // fallback (호환)
+  return textOverrides[slot.id] !== undefined ? textOverrides[slot.id] : (textDefaults[slot.id]||'');
+}
+function enableReveal(slot, slideEl){
+  const el = resolveTextElement(slot, slideEl);
+  if(!el) return;
+  el.dataset.revealOriginal = currentTextOf(slot, slideEl);
+  el.classList.add('reveal-toggle');
+  el.dataset.revealState = 'hidden';
+  el.textContent = '👀 클릭해서 확인!';
+  if(!el._revealHandler){
+    el._revealHandler = ()=>{
+      if(el.dataset.revealState === 'hidden'){
+        applyTextToElement(slot, el.dataset.revealOriginal, slideEl);
+        el.dataset.revealState = 'shown';
+      }else{
+        el.textContent = '👀 클릭해서 확인!';
+        el.dataset.revealState = 'hidden';
+      }
+    };
+    el.addEventListener('click', el._revealHandler);
+  }
+}
+function disableReveal(slot, slideEl){
+  const el = resolveTextElement(slot, slideEl);
+  if(!el) return;
+  el.classList.remove('reveal-toggle');
+  delete el.dataset.revealState;
+  delete el.dataset.revealOriginal;
+  if(el._revealHandler){
+    el.removeEventListener('click', el._revealHandler);
+    el._revealHandler = null;
+  }
+  applyTextToElement(slot, currentTextOf(slot, slideEl), slideEl);
+}
+function applyStoredReveals(){
+  document.querySelectorAll('.sl').forEach(slideEl=>{
+    const sid = slideEl.dataset.slideId;
+    const kind = slideEl.dataset.slideKind;
+    const slots = textConfig[kind] || [];
+    slots.forEach(slot=>{
+      const key = revealStateKey(sid, slot.id);
+      if(revealState[key] && !REVEAL_EXCLUDED.has(slot.id) && !slot.multiline){
+        enableReveal(slot, slideEl);
+      }
+    });
+  });
+}
+// reveal 대상에서 제외할 슬롯 (표지 타이틀은 스타일상 버튼화 부적합)
+const REVEAL_EXCLUDED = new Set(['cover-title']);
+
+// 텍스트 override 키 형식: "<slideId>:<slot.id>"
+// 하위호환: 기존 "slot.id" 단독 키는 원본 슬라이드 ID에 매핑됨
+function textKey(slideId, slotId){ return `${slideId}:${slotId}`; }
+
+// 원본 기본 텍스트 캐시: { "<slideId>:<slot.id>": value }
+const textDefaults = {};
+function captureTextDefaults(){
+  document.querySelectorAll('.sl').forEach(slideEl=>{
+    const sid = slideEl.dataset.slideId;
+    const kind = slideEl.dataset.slideKind;
+    const slots = textConfig[kind] || [];
+    slots.forEach(slot=>{
+      const key = textKey(sid, slot.id);
+      if(!(key in textDefaults)){
+        textDefaults[key] = getDefaultText(slot, slideEl);
+      }
+    });
+  });
+}
+captureTextDefaults();
+
+// 마이그레이션: 기존 단독 키를 원본 슬라이드 ID 기반으로 변환
+(function migrateTextOverrides(){
+  try{
+    let changed = false;
+    Object.keys(textOverrides).forEach(k=>{
+      if(k.includes(':')) return; // 이미 새 형식
+      for(const [kind, slots] of Object.entries(textConfig)){
+        if(slots.some(s => s.id === k)){
+          const sid = ORIGINAL_SLIDE_IDS[kind];
+          if(sid){
+            const newKey = textKey(sid, k);
+            if(!(newKey in textOverrides)){
+              textOverrides[newKey] = textOverrides[k];
+              changed = true;
+            }
+            delete textOverrides[k];
+            changed = true;
+          }
+          break;
+        }
+      }
+    });
+    if(changed) saveTextOverrides();
+  }catch(e){ console.warn('[migrateTextOverrides] 실패, 무시:', e); }
+})();
+
+function getCurrentTextValue(slideId, slot){
+  const key = textKey(slideId, slot.id);
+  if(textOverrides[key] !== undefined) return textOverrides[key];
+  return textDefaults[key] !== undefined ? textDefaults[key] : '';
+}
+
+function applyStoredTexts(){
+  document.querySelectorAll('.sl').forEach(slideEl=>{
+    const sid = slideEl.dataset.slideId;
+    const kind = slideEl.dataset.slideKind;
+    const slots = textConfig[kind] || [];
+    slots.forEach(slot=>{
+      const key = textKey(sid, slot.id);
+      // 캐시에 기본값이 없으면 지금 캡처 (복사로 생긴 슬라이드)
+      if(!(key in textDefaults)){
+        textDefaults[key] = getDefaultText(slot, slideEl);
+      }
+      if(textOverrides[key] !== undefined){
+        applyTextToElement(slot, textOverrides[key], slideEl);
+      }
+    });
+  });
+}
+function buildTextEditor(){
+  const tabsEl = document.getElementById('textEditorTabs');
+  const bodyEl = document.getElementById('textEditorBody');
+  tabsEl.innerHTML = '';
+  bodyEl.innerHTML = '';
+  // 현재 DOM 순서대로 모든 슬라이드 순회.
+  // 같은 kind라도 슬라이드 ID가 다르면 별도 탭 (복사된 슬라이드도 독립 편집)
+  const slideEntries = [];
+  slideOrder.forEach(id => {
+    const kind = getSlideKind(id);
+    const hasText = !!textConfig[kind];
+    const hasList = listConfig.some(l => l.slide === kind);
+    if(!hasText && !hasList) return;
+    slideEntries.push({slideId: id, kind});
+  });
+  // 같은 kind의 슬라이드가 여러 개면 #1, #2 표시
+  const kindCounts = {};
+  slideEntries.forEach(e => kindCounts[e.kind] = (kindCounts[e.kind]||0) + 1);
+  const kindSeen = {};
+
+  slideEntries.forEach((entry, i)=>{
+    const sid = entry.slideId;
+    const kind = entry.kind;
+    kindSeen[kind] = (kindSeen[kind]||0) + 1;
+    const dupSuffix = kindCounts[kind] > 1 ? ` #${kindSeen[kind]}` : '';
+    const label = `${(kindTitles[kind] || kind)}${dupSuffix}`;
+
+    const tab = document.createElement('button');
+    tab.type='button';
+    tab.className='image-manager-tab' + (i===0?' active':'');
+    tab.dataset.textSlide = sid;
+    tab.textContent = label;
+    tab.onclick = ()=>activateTextEditorTab(sid);
+    tabsEl.appendChild(tab);
+
+    const group = document.createElement('div');
+    group.className='image-manager-group' + (i===0?' active':'');
+    group.dataset.textSlide = sid;
+
+    const slideEl = getSlideById(sid);
+
+    // 1) textConfig 슬롯
+    const slots = textConfig[kind] || [];
+    slots.forEach(slot=>{
+      const card = document.createElement('div');
+      card.className='text-editor-card';
+      const labelEl = document.createElement('div');
+      labelEl.className='text-editor-label';
+      labelEl.textContent = slot.label;
+      card.appendChild(labelEl);
+      if(slot.hint){
+        const hint = document.createElement('div');
+        hint.className='text-editor-hint';
+        hint.textContent = slot.hint;
+        card.appendChild(hint);
+      }
+      const key = textKey(sid, slot.id);
+      const currentVal = textOverrides[key] !== undefined ? textOverrides[key] : (textDefaults[key]||'');
+      let input;
+      if(slot.multiline){
+        input = document.createElement('textarea');
+        input.className='text-editor-textarea';
+        input.rows = slot.id==='cover-title' ? 2 : 2;
+      }else{
+        input = document.createElement('input');
+        input.className='text-editor-input';
+        input.type='text';
+      }
+      input.value = currentVal;
+      input.addEventListener('input', ()=>{
+        textOverrides[key] = input.value;
+        // reveal 활성 시: 화면엔 즉시 안 적용, 원본값만 갱신
+        const revealKey = revealStateKey(sid, slot.id);
+        if(revealState[revealKey]){
+          const el = resolveTextElement(slot, slideEl);
+          if(el) el.dataset.revealOriginal = input.value;
+        }else{
+          applyTextToElement(slot, input.value, slideEl);
+        }
+        saveTextOverrides();
+        if(slot.id && slot.id.endsWith('-pct')){
+          updateDonut();
+        }
+      });
+      card.appendChild(input);
+
+      // reveal 체크박스 (단일행 슬롯에만, 제외 리스트 외)
+      if(!slot.multiline && !REVEAL_EXCLUDED.has(slot.id)){
+        const revealKey = revealStateKey(sid, slot.id);
+        const labelWrap = document.createElement('label');
+        labelWrap.className='text-editor-reveal';
+        const cb = document.createElement('input');
+        cb.type='checkbox';
+        cb.checked = !!revealState[revealKey];
+        cb.addEventListener('change', ()=>{
+          if(cb.checked){
+            revealState[revealKey] = true;
+            enableReveal(slot, slideEl);
+          }else{
+            delete revealState[revealKey];
+            disableReveal(slot, slideEl);
+          }
+          saveRevealState();
+        });
+        labelWrap.appendChild(cb);
+        labelWrap.appendChild(document.createTextNode(' 🔒 클릭해서 공개'));
+        card.appendChild(labelWrap);
+      }
+
+      group.appendChild(card);
+    });
+
+    // 2) listConfig 에서 해당 슬라이드의 리스트 편집 UI (슬라이드 ID 기반)
+    const lists = listConfig.filter(l => l.slide === kind);
+    lists.forEach(def=> buildListEditorCard(def, group, sid));
+
+    bodyEl.appendChild(group);
+  });
+}
+
+function buildListEditorCard(def, parent, slideId){
+  const slideEl = getSlideById(slideId);
+  const card = document.createElement('div');
+  card.className='text-editor-card list-editor';
+  card.dataset.listId = def.id;
+  card.dataset.slideId = slideId;
+  card.innerHTML = `
+    <div class="text-editor-label">${def.label} <span style="font-weight:500;color:var(--tl);font-size:10px;">(추가/삭제 가능)</span></div>
+    <div class="list-items"></div>
+    <button type="button" class="list-add-btn">➕ 항목 추가</button>
+  `;
+  const itemsEl = card.querySelector('.list-items');
+  const addBtn = card.querySelector('.list-add-btn');
+
+  function rebuildRows(){
+    itemsEl.innerHTML = '';
+    const items = getListItems(def, slideId);
+    items.forEach((item, idx)=>{
+      const row = document.createElement('div');
+      row.className='list-item-row';
+      const iconInput = document.createElement('input');
+      iconInput.className='list-icon-input';
+      iconInput.type='text';
+      iconInput.maxLength = 4;
+      iconInput.value = item.icon||'';
+      const textInput = def.multiline ? document.createElement('textarea') : document.createElement('input');
+      textInput.className='list-text-input';
+      if(!def.multiline) textInput.type='text';
+      textInput.value = item.text||'';
+      if(def.multiline) textInput.rows = 2;
+      const delBtn = document.createElement('button');
+      delBtn.type='button';
+      delBtn.className='list-del-btn';
+      delBtn.textContent = '×';
+      delBtn.title = '이 항목 삭제';
+
+      iconInput.addEventListener('input', ()=>{
+        const cur = getListItems(def, slideId).slice();
+        cur[idx] = {...cur[idx], icon: iconInput.value};
+        setListItems(def, slideId, cur);
+        renderList(def, slideEl);
+      });
+      textInput.addEventListener('input', ()=>{
+        const cur = getListItems(def, slideId).slice();
+        cur[idx] = {...cur[idx], text: textInput.value};
+        setListItems(def, slideId, cur);
+        renderList(def, slideEl);
+      });
+      delBtn.addEventListener('click', ()=>{
+        const cur = getListItems(def, slideId).slice();
+        cur.splice(idx, 1);
+        setListItems(def, slideId, cur);
+        renderList(def, slideEl);
+        rebuildRows();
+      });
+
+      row.appendChild(iconInput);
+      row.appendChild(textInput);
+      row.appendChild(delBtn);
+      itemsEl.appendChild(row);
+
+      // 옵션 체크박스들
+      const optsRow = document.createElement('div');
+      optsRow.className = 'list-item-opts';
+
+      const revealRow = document.createElement('label');
+      revealRow.className = 'list-item-reveal';
+      const revealCb = document.createElement('input');
+      revealCb.type = 'checkbox';
+      revealCb.checked = !!item.reveal;
+      revealCb.addEventListener('change', ()=>{
+        const cur = getListItems(def, slideId).slice();
+        cur[idx] = {...cur[idx], reveal: revealCb.checked};
+        setListItems(def, slideId, cur);
+        renderList(def, slideEl);
+      });
+      revealRow.appendChild(revealCb);
+      revealRow.appendChild(document.createTextNode(' 🔒 클릭해서 공개'));
+      optsRow.appendChild(revealRow);
+
+      if(def.kind === 'check'){
+        const checkableRow = document.createElement('label');
+        checkableRow.className = 'list-item-reveal';
+        const checkableCb = document.createElement('input');
+        checkableCb.type = 'checkbox';
+        checkableCb.checked = item.checkable !== false;
+        checkableCb.addEventListener('change', ()=>{
+          const cur = getListItems(def, slideId).slice();
+          cur[idx] = {...cur[idx], checkable: checkableCb.checked};
+          setListItems(def, slideId, cur);
+          renderList(def, slideEl);
+        });
+        checkableRow.appendChild(checkableCb);
+        checkableRow.appendChild(document.createTextNode(' ☑️ 체크 가능'));
+        optsRow.appendChild(checkableRow);
+      }
+
+      itemsEl.appendChild(optsRow);
+    });
+  }
+  rebuildRows();
+
+  addBtn.addEventListener('click', ()=>{
+    const cur = getListItems(def, slideId).slice();
+    const nextIdx = cur.length + 1;
+    const icon = def.defaultIcon || '🌸';
+    const baseText = def.defaultText || '새 항목';
+    const newItem = {icon, text: `${baseText} ${nextIdx}`, reveal:false};
+    if(def.kind === 'check') newItem.checkable = true;
+    cur.push(newItem);
+    setListItems(def, slideId, cur);
+    renderList(def, slideEl);
+    rebuildRows();
+  });
+
+  parent.appendChild(card);
+}
+function activateTextEditorTab(slide){
+  document.querySelectorAll('[data-text-slide]').forEach(el=>{
+    if(el.tagName==='BUTTON') el.classList.toggle('active', el.dataset.textSlide===String(slide));
+    else el.classList.toggle('active', el.dataset.textSlide===String(slide));
+  });
+}
+
+/* ============================================
+   테마(색상) 편집
+============================================ */
+const THEME_STORAGE_KEY = 'soha-ppt-theme-v1';
+const themeVars = [
+  {key:'--pk',    label:'메인 핑크',     hint:'주요 포인트 컬러'},
+  {key:'--pk-d',  label:'다크 핑크',     hint:'텍스트 강조 / 그라데이션'},
+  {key:'--pk-dd', label:'디퍼 다크',     hint:'가장 짙은 톤'},
+  {key:'--pk-a',  label:'액센트',        hint:'하이라이트'},
+  {key:'--pk-m',  label:'미디엄 핑크',   hint:'배경 그라데이션 끝 / 프레임'},
+  {key:'--pk-l',  label:'가장 연한 톤',  hint:'배경에 사용'},
+  {key:'--pk-s',  label:'서브틀 톤',     hint:'체크리스트 선택 배경'},
+  {key:'--td',    label:'텍스트 - 진함', hint:'본문 기본 텍스트'},
+  {key:'--tm',    label:'텍스트 - 중간', hint:'보조 텍스트'},
+  {key:'--tl',    label:'텍스트 - 연함', hint:'라벨 / 서브 텍스트'},
+  {key:'--paper', label:'대지(종이) 배경', hint:'슬라이드 내부 종이 색'},
+  {key:'--paper-border', label:'종이 테두리', hint:''}
+];
+const themePresets = {
+  'pink': {label:'🌸 핑크 (기본)', vars:{'--pk':'#e8729a','--pk-l':'#fff0f5','--pk-m':'#ffd6e7','--pk-s':'#fff5f9','--pk-a':'#ff9ec4','--pk-d':'#d4568a','--pk-dd':'#b8407a','--td':'#4a2040','--tm':'#6b3a5a','--tl':'#c48aa8','--paper':'#fefbf3','--paper-border':'#f5e6d0'}},
+  'mint':  {label:'🌿 민트', vars:{'--pk':'#4cafa1','--pk-l':'#f0faf7','--pk-m':'#c8ebe3','--pk-s':'#f5fbf9','--pk-a':'#7ecfc0','--pk-d':'#3d8b7a','--pk-dd':'#2a6b5c','--td':'#1f4540','--tm':'#3a6b60','--tl':'#7ea8a0','--paper':'#f8fcfa','--paper-border':'#dae8e2'}},
+  'lavender':{label:'💜 라벤더', vars:{'--pk':'#9a7ec9','--pk-l':'#f5f0ff','--pk-m':'#e0d4f0','--pk-s':'#f8f5ff','--pk-a':'#b8a4dd','--pk-d':'#7b6ba8','--pk-dd':'#5e4f85','--td':'#2e2040','--tm':'#4a3a5e','--tl':'#9884b0','--paper':'#fbf9fd','--paper-border':'#e6dcef'}},
+  'peach': {label:'🍑 피치', vars:{'--pk':'#ed8a5c','--pk-l':'#fff4ec','--pk-m':'#ffd6bf','--pk-s':'#fff7f1','--pk-a':'#ffad85','--pk-d':'#c7653a','--pk-dd':'#9a4820','--td':'#4a2818','--tm':'#7a4830','--tl':'#c89878','--paper':'#fffaf5','--paper-border':'#f0dec8'}},
+  'sky':   {label:'☁️ 스카이', vars:{'--pk':'#5ca4d8','--pk-l':'#eff8ff','--pk-m':'#c7e1f2','--pk-s':'#f4faff','--pk-a':'#86c4e8','--pk-d':'#3d7bad','--pk-dd':'#2a5a85','--td':'#1a3550','--tm':'#3a5a7a','--tl':'#88a8c0','--paper':'#fafdff','--paper-border':'#d8e4ee'}},
+  'sunset':{label:'🌅 선셋', vars:{'--pk':'#e85c7c','--pk-l':'#fff0f3','--pk-m':'#ffcdd8','--pk-s':'#fff6f8','--pk-a':'#ff9aae','--pk-d':'#b8405e','--pk-dd':'#8a2a44','--td':'#401822','--tm':'#6b2a3e','--tl':'#c07a8c','--paper':'#fffaf8','--paper-border':'#f0dadf'}}
+};
+let themeState = (()=>{try{return JSON.parse(localStorage.getItem(THEME_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+const themeDefaults = {};
+themeVars.forEach(v=>{
+  themeDefaults[v.key] = getComputedStyle(document.documentElement).getPropertyValue(v.key).trim() || themePresets.pink.vars[v.key];
+});
+// hex(#rrggbb) -> "r, g, b" (rgba()용 CSS 변수)
+function hexToRgb(hex){
+  if(!hex) return '';
+  const m = hex.trim().replace('#','').match(/^([0-9a-f]{6})$/i);
+  if(!m) return '';
+  const n = parseInt(m[1], 16);
+  return `${(n>>16)&255}, ${(n>>8)&255}, ${n&255}`;
+}
+// RGB 변수가 존재하는 키들 (커버 배경 애니메이션용)
+const RGB_PAIRED_KEYS = new Set(['--pk','--pk-d','--pk-dd','--pk-m','--pk-a','--pk-l','--pk-s']);
+function applyTheme(vars){
+  Object.entries(vars).forEach(([k,v])=>{
+    if(v){
+      document.documentElement.style.setProperty(k, v);
+      if(RGB_PAIRED_KEYS.has(k)){
+        const rgb = hexToRgb(v);
+        if(rgb) document.documentElement.style.setProperty(`${k}-rgb`, rgb);
+      }
+    }
+  });
+}
+function saveTheme(){
+  try{localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(themeState));}catch(e){console.warn(e);}
+}
+function applyStoredTheme(){
+  if(themeState && Object.keys(themeState).length){
+    applyTheme(themeState);
+  }
+}
+function getCurrentColor(key){
+  return themeState[key] || themeDefaults[key] || '#000000';
+}
+function normalizeHex(v){
+  if(!v) return '';
+  v = v.trim();
+  if(!v.startsWith('#')) v = '#'+v;
+  return v;
+}
+function buildThemeEditor(){
+  // 프리셋 버튼
+  const presetsEl = document.getElementById('themePresets');
+  presetsEl.innerHTML = '';
+  Object.entries(themePresets).forEach(([key, preset])=>{
+    const btn = document.createElement('button');
+    btn.type='button';
+    btn.className='theme-preset-btn';
+    btn.textContent = preset.label;
+    btn.style.background = `linear-gradient(135deg, ${preset.vars['--pk']}, ${preset.vars['--pk-a']})`;
+    btn.onclick = ()=>{
+      themeState = {...preset.vars};
+      applyTheme(themeState);
+      saveTheme();
+      refreshThemeEditor();
+    };
+    presetsEl.appendChild(btn);
+  });
+  // 개별 색상 컨트롤
+  const controls = document.getElementById('themeControls');
+  controls.innerHTML = '';
+  themeVars.forEach(v=>{
+    const row = document.createElement('div');
+    row.className='theme-control-row';
+    const current = getCurrentColor(v.key);
+    row.innerHTML = `
+      <label class="theme-control-swatch" style="background:${current}">
+        <input type="color" value="${current}" data-theme-key="${v.key}">
+      </label>
+      <div class="theme-control-info">
+        <div class="theme-control-label">${v.label}</div>
+        <div class="theme-control-hint">${v.hint||v.key}</div>
+      </div>
+      <input class="theme-control-hex" type="text" value="${current.toUpperCase()}" data-theme-hex="${v.key}" maxlength="7">
+    `;
+    const colorInput = row.querySelector('input[type="color"]');
+    const hexInput = row.querySelector('.theme-control-hex');
+    const swatch = row.querySelector('.theme-control-swatch');
+    colorInput.addEventListener('input', ()=>{
+      themeState[v.key] = colorInput.value;
+      hexInput.value = colorInput.value.toUpperCase();
+      swatch.style.background = colorInput.value;
+      applyTheme({[v.key]: colorInput.value});
+      saveTheme();
+    });
+    hexInput.addEventListener('change', ()=>{
+      const val = normalizeHex(hexInput.value);
+      if(/^#[0-9a-f]{6}$/i.test(val)){
+        themeState[v.key] = val;
+        colorInput.value = val;
+        swatch.style.background = val;
+        applyTheme({[v.key]: val});
+        saveTheme();
+      }else{
+        hexInput.value = getCurrentColor(v.key).toUpperCase();
+      }
+    });
+    controls.appendChild(row);
+  });
+}
+function refreshThemeEditor(){
+  document.querySelectorAll('[data-theme-key]').forEach(input=>{
+    const key = input.dataset.themeKey;
+    const val = getCurrentColor(key);
+    input.value = val;
+    const swatch = input.closest('.theme-control-swatch');
+    if(swatch) swatch.style.background = val;
+  });
+  document.querySelectorAll('[data-theme-hex]').forEach(input=>{
+    input.value = getCurrentColor(input.dataset.themeHex).toUpperCase();
+  });
+}
+document.getElementById('themeResetBtn').addEventListener('click', ()=>{
+  themeState = {};
+  // 기본값 복원 (hex + RGB 병렬 변수 모두)
+  themeVars.forEach(v=>{
+    document.documentElement.style.removeProperty(v.key);
+    if(RGB_PAIRED_KEYS.has(v.key)){
+      document.documentElement.style.removeProperty(`${v.key}-rgb`);
+    }
+  });
+  saveTheme();
+  refreshThemeEditor();
+});
+
+/* ============================================
+   레이아웃(간격) 편집
+============================================ */
+const LAYOUT_STORAGE_KEY = 'soha-ppt-layout-v1';
+const layoutVars = [
+  // 📐 전체 (모든 슬라이드 공통)
+  {key:'--paper-left-pull',            slide:'*', label:'대지·내용 좌측 쏠림',  hint:'0 = 중앙, 클수록 왼쪽으로 이동',   min:0,  max:400, step:5, unit:'px', def:0},
+  {key:'--paper-width-shrink',         slide:'*', label:'대지 너비 축소',        hint:'오른쪽에 여백 만들기 (8:2 효과는 ~400)', min:0,  max:500, step:5, unit:'px', def:0},
+  // 1. 표지
+  {key:'--cover-title-letter-spacing', slide:'cover', label:'타이틀 자간',          hint:'메인 타이틀 글자 사이 간격',       min:0,  max:20,  step:1, unit:'px', def:8},
+  {key:'--cover-tag-mb',               slide:'cover', label:'태그 → 타이틀 간격',  hint:'상단 날짜 태그와 타이틀 사이',     min:0,  max:40,  step:1, unit:'px', def:12},
+  {key:'--cover-sub-mt',               slide:'cover', label:'타이틀 → 서브 간격',  hint:'타이틀과 서브타이틀 사이',         min:0,  max:40,  step:1, unit:'px', def:8},
+  // 2. 프로필
+  {key:'--profile-row-padding-y',      slide:'profile', label:'프로필 행 세로 패딩',  hint:'각 항목의 높이감',                 min:6,  max:40,  step:1, unit:'px', def:18},
+  // 3. 호불호 / 4. 장단점 공용
+  {key:'--card-page-gap',              slide:'likes-dislikes', label:'좌↔우 섹션 간격',      hint:'호불호(3p)·장단점(4p) 공통',       min:10, max:100, step:2, unit:'px', def:40},
+  {key:'--card-page-padding',          slide:'likes-dislikes', label:'내부 여백',            hint:'종이 가장자리와 카드 사이 (3p·4p 공통)', min:20, max:120, step:2, unit:'px', def:60},
+  // 5. 방송특징
+  {key:'--content-header-mb',          slide:'contents', label:'제목 → 콘텐츠 간격',  hint:'"방송 특징" 제목과 아래 차트/표 사이',  min:0,  max:120, step:2, unit:'px', def:20},
+  {key:'--content-split-gap',          slide:'contents', label:'좌↔우 컬럼 간격',      hint:'주 컨텐츠와 방송 시간 사이',       min:10, max:120, step:2, unit:'px', def:60},
+  {key:'--content-col-gap',            slide:'contents', label:'컬럼 내부 세로 간격',  hint:'부제목·차트·방송시간·요일 사이',   min:6,  max:60,  step:1, unit:'px', def:22},
+  {key:'--content-cl-padding-x',       slide:'contents', label:'좌/우 안쪽 여백',      hint:'종이 가장자리와 내용 사이',       min:10, max:100, step:2, unit:'px', def:30},
+  {key:'--content-cl-padding-y',       slide:'contents', label:'상/하 안쪽 여백',      hint:'',                                 min:10, max:100, step:2, unit:'px', def:40},
+  {key:'--sched-row-padding-y',        slide:'contents', label:'방송 시간 행 세로 여백', hint:'평일/주말 박스 높이감',         min:6,  max:40,  step:1, unit:'px', def:16},
+  {key:'--weekday-gap',                slide:'contents', label:'요일 셀 사이 간격',    hint:'월~일 버튼 사이',                 min:0,  max:20,  step:1, unit:'px', def:8},
+  // 6. 방송목표
+  {key:'--goals-header-mb',            slide:'goals', label:'제목 → 체크리스트 간격', hint:'"방송 목표" 제목과 아래 체크리스트 사이', min:0,  max:120, step:2, unit:'px', def:20},
+  {key:'--ckl-gap',                    slide:'goals', label:'체크리스트 항목 간격', hint:'목표 항목들 사이 세로 간격',       min:4,  max:40,  step:1, unit:'px', def:16},
+  {key:'--cki-padding-y',              slide:'goals', label:'체크 항목 세로 패딩',  hint:'항목 높이감',                     min:6,  max:40,  step:1, unit:'px', def:18},
+  // 7. QnA - 토글
+  {type:'toggle', key:'qna-minimal',   slide:'qna', label:'미니멀 모드',          hint:'이미지/서브 문구 숨기고 타이틀만 중앙에 크게', def:false, bodyClass:'qna-minimal'},
+  // 8. 마무리
+  {key:'--thanks-letter-spacing',      slide:'thanks', label:'메인 텍스트 자간',    hint:'"감사합니다!" 글자 사이 간격',     min:0,  max:20,  step:1, unit:'px', def:5}
+];
+let layoutState = (()=>{try{return JSON.parse(localStorage.getItem(LAYOUT_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+
+// toggle 변수의 body 클래스 적용 (key는 'qna-minimal' 등 단순 문자열)
+function applyToggle(varDef, on){
+  if(varDef.bodyClass){
+    document.body.classList.toggle(varDef.bodyClass, !!on);
+  }
+}
+function applyLayout(vars){
+  Object.entries(vars).forEach(([k,v])=>{
+    const def = layoutVars.find(d=>d.key === k);
+    if(def && def.type === 'toggle'){
+      applyToggle(def, v === true || v === 'true' || v === 1);
+    }else if(v != null){
+      document.documentElement.style.setProperty(k, v);
+    }
+  });
+}
+function saveLayout(){
+  try{localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layoutState));}catch(e){console.warn(e);}
+}
+function applyStoredLayout(){
+  if(layoutState && Object.keys(layoutState).length){
+    applyLayout(layoutState);
+  }
+}
+function getLayoutValue(varDef){
+  if(varDef.type === 'toggle'){
+    // 저장값이 있으면 그것을, 없으면 def 사용
+    if(layoutState[varDef.key] !== undefined){
+      const v = layoutState[varDef.key];
+      return (v === true || v === 'true' || v === 1);
+    }
+    return !!varDef.def;
+  }
+  if(layoutState[varDef.key]){
+    const n = parseInt(layoutState[varDef.key], 10);
+    if(!Number.isNaN(n)) return n;
+  }
+  return varDef.def;
+}
+
+// 슬라이드 키 정렬: '*'은 항상 맨 앞, 나머지는 현재 DOM 슬라이드 순서대로 (중복 kind는 제거)
+function sortLayoutSlideKeys(keys){
+  const hasGlobal = keys.includes('*');
+  const orderedKinds = [];
+  const seen = new Set();
+  slideOrder.forEach(id => {
+    const k = getSlideKind(id);
+    if(seen.has(k)) return;
+    if(keys.includes(k)){
+      orderedKinds.push(k);
+      seen.add(k);
+    }
+  });
+  return hasGlobal ? ['*', ...orderedKinds] : orderedKinds;
+}
+
+function buildLayoutEditor(){
+  const tabsEl = document.getElementById('layoutTabs');
+  const bodyEl = document.getElementById('layoutBody');
+  if(!tabsEl || !bodyEl) return;
+  tabsEl.innerHTML = '';
+  bodyEl.innerHTML = '';
+  // 슬라이드별로 변수 그룹핑
+  const grouped = {};
+  layoutVars.forEach(v=>{
+    if(!grouped[v.slide]) grouped[v.slide] = [];
+    grouped[v.slide].push(v);
+  });
+  const slides = sortLayoutSlideKeys(Object.keys(grouped));
+  slides.forEach((slide, slideIndex)=>{
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'image-manager-tab' + (slideIndex===0 ? ' active' : '');
+    tab.dataset.layoutSlide = slide;
+    tab.textContent = slide === '*' ? '📐 전체' : (kindTitles[slide] || slide);
+    tab.onclick = ()=>activateLayoutTab(slide);
+    tabsEl.appendChild(tab);
+
+    const group = document.createElement('div');
+    group.className = 'image-manager-group' + (slideIndex===0 ? ' active' : '');
+    group.dataset.layoutSlide = slide;
+    // 이 슬라이드의 컨트롤들 렌더
+    grouped[slide].forEach(v=>{
+      const row = document.createElement('div');
+      row.className = 'layout-control-row';
+      const current = getLayoutValue(v);
+
+      if(v.type === 'toggle'){
+        // 체크박스 UI
+        row.innerHTML = `
+          <label class="layout-toggle-label">
+            <input type="checkbox" class="layout-toggle-cb" data-layout-key="${v.key}"
+                   ${current ? 'checked' : ''}>
+            <span class="layout-toggle-text">
+              <span class="layout-control-label">${v.label}</span>
+              ${v.hint ? `<span class="layout-control-hint">${v.hint}</span>` : ''}
+            </span>
+          </label>
+        `;
+        const cb = row.querySelector('input[type="checkbox"]');
+        cb.addEventListener('change', ()=>{
+          layoutState[v.key] = cb.checked;
+          applyToggle(v, cb.checked);
+          saveLayout();
+        });
+      }else{
+        // 슬라이더 UI
+        row.innerHTML = `
+          <div class="layout-control-head">
+            <div class="layout-control-label">${v.label}</div>
+            <div class="layout-control-value" data-layout-val="${v.key}">${current}${v.unit}</div>
+          </div>
+          ${v.hint ? `<div class="layout-control-hint">${v.hint}</div>` : ''}
+          <input type="range" class="layout-control-slider"
+                 min="${v.min}" max="${v.max}" step="${v.step}"
+                 value="${current}" data-layout-key="${v.key}" data-layout-unit="${v.unit}">
+        `;
+        const slider = row.querySelector('input[type="range"]');
+        const valEl = row.querySelector('.layout-control-value');
+        slider.addEventListener('input', ()=>{
+          const newVal = slider.value + v.unit;
+          layoutState[v.key] = newVal;
+          applyLayout({[v.key]: newVal});
+          valEl.textContent = slider.value + v.unit;
+          saveLayout();
+        });
+      }
+      group.appendChild(row);
+    });
+    bodyEl.appendChild(group);
+  });
+}
+function activateLayoutTab(slide){
+  document.querySelectorAll('[data-layout-slide]').forEach(el=>{
+    el.classList.toggle('active', el.dataset.layoutSlide===String(slide));
+  });
+}
+function refreshLayoutEditor(){
+  layoutVars.forEach(v=>{
+    const current = getLayoutValue(v);
+    if(v.type === 'toggle'){
+      const cb = document.querySelector(`input.layout-toggle-cb[data-layout-key="${v.key}"]`);
+      if(cb) cb.checked = !!current;
+    }else{
+      const slider = document.querySelector(`input[type="range"][data-layout-key="${v.key}"]`);
+      const valEl = document.querySelector(`[data-layout-val="${v.key}"]`);
+      if(slider) slider.value = current;
+      if(valEl) valEl.textContent = current + v.unit;
+    }
+  });
+}
+document.getElementById('layoutResetBtn').addEventListener('click', ()=>{
+  layoutState = {};
+  layoutVars.forEach(v=>{
+    if(v.type === 'toggle'){
+      if(v.bodyClass) document.body.classList.remove(v.bodyClass);
+    }else{
+      document.documentElement.style.removeProperty(v.key);
+    }
+  });
+  saveLayout();
+  refreshLayoutEditor();
+});
+
+const STICKER_STORAGE_KEY = 'soha-ppt-stickers-v1';
+let stickerOverrides = (()=>{try{return JSON.parse(localStorage.getItem(STICKER_STORAGE_KEY)||'{}');}catch(e){return{};}})();
+// 마이그레이션: 기존 idx 기반 키 (s0-corner-0, s5-stk-1 등) → 새 ID 기반 키 (s_cover-corner-0 등)
+(function migrateStickerKeys(){
+  const idxToId = {'0':'s_cover','1':'s_profile','2':'s_likes','3':'s_pros','4':'s_contents','5':'s_goals','6':'s_qna','7':'s_thanks'};
+  const migrated = {};
+  let changed = false;
+  Object.entries(stickerOverrides).forEach(([k,v])=>{
+    const m = k.match(/^s(\d+)-(.+)$/);
+    if(m && idxToId[m[1]]){
+      const newKey = `${idxToId[m[1]]}-${m[2]}`;
+      if(!(newKey in stickerOverrides)){ migrated[newKey] = v; changed = true; }
+    }else{
+      migrated[k] = v;
+    }
+  });
+  if(changed){
+    stickerOverrides = migrated;
+    try{ localStorage.setItem(STICKER_STORAGE_KEY, JSON.stringify(stickerOverrides)); }catch(e){}
+  }
+})();
+
+function saveStickerOverrides(){
+  try{localStorage.setItem(STICKER_STORAGE_KEY, JSON.stringify(stickerOverrides));}catch(e){console.warn(e);}
+}
+// 편집 가능한 스티커 요소 수집
+// paper 안에 동적으로 추가되는 .sticker 포함
+function collectStickers(){
+  const out = [];
+  document.querySelectorAll('.sl').forEach(slide=>{
+    const sid = slide.dataset.slideId;
+    const kind = slide.dataset.slideKind;
+    // 코너 장식 (프레임 모서리)
+    slide.querySelectorAll('.corner').forEach((el, i)=>{
+      const pos = ['좌상','우상','좌하','우하'][i] || `${i+1}번`;
+      out.push({slide:sid, kind, id:`${sid}-corner-${i}`, el, label:`프레임 모서리 (${pos})`});
+    });
+    // 커버 코너 (표지/감사 슬라이드)
+    slide.querySelectorAll('.cover-corner').forEach((el, i)=>{
+      const pos = ['좌상','우상','좌하','우하'][i] || `${i+1}번`;
+      out.push({slide:sid, kind, id:`${sid}-ccorner-${i}`, el, label:`커버 모서리 (${pos})`});
+    });
+    // 떠다니는 스티커 (.stk)
+    slide.querySelectorAll('.stk').forEach((el, i)=>{
+      out.push({slide:sid, kind, id:`${sid}-stk-${i}`, el, label:`떠다니는 스티커 ${i+1}`});
+    });
+    // 꽃잎 (.petal)
+    slide.querySelectorAll('.petal').forEach((el, i)=>{
+      out.push({slide:sid, kind, id:`${sid}-petal-${i}`, el, label:`꽃잎 장식 ${i+1}`});
+    });
+    // 종이 위 대형 스티커 (paper::innerHTML로 동적 추가된 .sticker)
+    slide.querySelectorAll('.paper .sticker').forEach((el, i)=>{
+      const pos = ['좌상 리본','우하','우측','좌측'][i] || `${i+1}번`;
+      out.push({slide:sid, kind, id:`${sid}-paper-${i}`, el, label:`종이 스티커 (${pos})`});
+    });
+  });
+  return out;
+}
+
+let stickerList = [];
+const stickerDefaults = {};
+
+function initStickerDefaults(){
+  stickerList = collectStickers();
+  stickerList.forEach(s=>{
+    stickerDefaults[s.id] = s.el.textContent;
+  });
+}
+function applyStickerToElement(s, value){
+  s.el.textContent = value;
+}
+function applyStoredStickers(){
+  stickerList.forEach(s=>{
+    if(stickerOverrides[s.id] !== undefined){
+      applyStickerToElement(s, stickerOverrides[s.id]);
+    }
+  });
+}
+
+const QUICK_STICKERS = ['🌸','🦊','🎀','⭐','💖','✨','💫','💕','🌙','🦋','🍓','🧸','☁️','🎈','🫧','💝','🌷','🍄','❤️','❌'];
+
+function buildStickerEditor(){
+  initStickerDefaults();
+
+  // 퀵 추가 버튼
+  const quickEl = document.getElementById('stickerQuickButtons');
+  quickEl.innerHTML = '';
+  // 마지막으로 포커스된 sticker-input을 추적 (버튼 클릭 후에도 유효하도록)
+  let lastFocusedStickerInput = null;
+  const stickerBodyEarly = document.getElementById('stickerEditorBody');
+  stickerBodyEarly.addEventListener('focusin', (e)=>{
+    if(e.target.classList && e.target.classList.contains('sticker-input')){
+      lastFocusedStickerInput = e.target;
+    }
+  });
+  QUICK_STICKERS.forEach(em=>{
+    const b = document.createElement('button');
+    b.type='button';
+    b.className='sticker-quick-btn';
+    b.textContent = em;
+    b.title = `포커스된 스티커를 ${em}로 변경`;
+    // mousedown에서 preventDefault — 버튼 클릭이 input에서 포커스 뺏는 것을 막음
+    b.addEventListener('mousedown', e => e.preventDefault());
+    b.addEventListener('click', ()=>{
+      // 1순위: 지금 포커스된 input, 2순위: 마지막으로 포커스됐던 input
+      const focused = document.activeElement;
+      const target = (focused && focused.classList && focused.classList.contains('sticker-input'))
+        ? focused : lastFocusedStickerInput;
+      if(target && document.body.contains(target)){
+        target.value = em;
+        target.dispatchEvent(new Event('input', {bubbles:true}));
+        target.focus();
+      }else{
+        alert('먼저 편집할 스티커 입력칸을 클릭해 포커스한 뒤 이 버튼을 눌러주세요.');
+      }
+    });
+    quickEl.appendChild(b);
+  });
+
+  const tabsEl = document.getElementById('stickerEditorTabs');
+  const bodyEl = document.getElementById('stickerEditorBody');
+  tabsEl.innerHTML = '';
+  bodyEl.innerHTML = '';
+
+  const grouped = {};
+  stickerList.forEach(s=>{
+    if(!grouped[s.slide]) grouped[s.slide]=[];
+    grouped[s.slide].push(s);
+  });
+  // DOM 순서대로 슬라이드 ID 정렬
+  const slides = slideOrder.filter(id => grouped[id]);
+  slides.forEach((slide, slideIndex)=>{
+    const tab = document.createElement('button');
+    tab.type='button';
+    tab.className='image-manager-tab' + (slideIndex===0?' active':'');
+    tab.dataset.stickerSlide = slide;
+    // 라벨: "3. 호불호" 형식
+    const idx = slideOrder.indexOf(slide);
+    const kind = getSlideKind(slide);
+    tab.textContent = `${idx+1}. ${kindTitles[kind] || kind}`;
+    tab.onclick = ()=>activateStickerTab(slide);
+    tabsEl.appendChild(tab);
+
+    const group = document.createElement('div');
+    group.className='image-manager-group' + (slideIndex===0?' active':'');
+    group.dataset.stickerSlide = slide;
+
+    grouped[slide].forEach(s=>{
+      const card = document.createElement('div');
+      card.className='sticker-card';
+      const currentVal = stickerOverrides[s.id] !== undefined ? stickerOverrides[s.id] : (stickerDefaults[s.id]||'');
+      card.innerHTML = `
+        <div class="sticker-preview">${currentVal}</div>
+        <div class="sticker-card-info">
+          <div class="sticker-card-label">${s.label}</div>
+          <input class="sticker-input" type="text" value="${currentVal.replace(/"/g,'&quot;')}" maxlength="8">
+        </div>
+        <button type="button" class="sticker-jump-btn">페이지 보기</button>
+      `;
+      const input = card.querySelector('.sticker-input');
+      const preview = card.querySelector('.sticker-preview');
+      const jumpBtn = card.querySelector('.sticker-jump-btn');
+      input.addEventListener('input', ()=>{
+        const v = input.value;
+        stickerOverrides[s.id] = v;
+        preview.textContent = v;
+        applyStickerToElement(s, v);
+        saveStickerOverrides();
+      });
+      jumpBtn.addEventListener('click', ()=>{
+        goTo(Number(slide));
+      });
+      group.appendChild(card);
+    });
+    bodyEl.appendChild(group);
+  });
+}
+function activateStickerTab(slide){
+  document.querySelectorAll('[data-sticker-slide]').forEach(el=>{
+    el.classList.toggle('active', el.dataset.stickerSlide===String(slide));
+  });
+}
+
+/* ============================================
+   설정 내보내기 / 불러오기 (JSON)
+============================================ */
+const SLIDE_LAYOUT_STORAGE_KEY = 'soha-ppt-slide-layout-v1'; // 슬라이드 순서/복사/추가 정보
+const ALL_STORAGE_KEYS = {
+  images:      IMAGE_STORAGE_KEY,       // 'soha-ppt-managed-images-v1'
+  texts:       TEXT_STORAGE_KEY,        // 'soha-ppt-text-overrides-v1'
+  lists:       LIST_STORAGE_KEY,        // 'soha-ppt-lists-v1'
+  reveals:     REVEAL_STORAGE_KEY,      // 'soha-ppt-reveals-v1'
+  theme:       THEME_STORAGE_KEY,       // 'soha-ppt-theme-v1'
+  layout:      LAYOUT_STORAGE_KEY,      // 'soha-ppt-layout-v1'
+  stickers:    STICKER_STORAGE_KEY,     // 'soha-ppt-stickers-v1'
+  slideLayout: SLIDE_LAYOUT_STORAGE_KEY // 'soha-ppt-slide-layout-v1' (순서/복사 등)
+};
+
+function exportSettings(){
+  const includeImages = document.getElementById('exportIncludeImages').checked;
+  const payload = {
+    _format: 'soha-ppt-settings',
+    _version: 1,
+    _exported_at: new Date().toISOString(),
+    _includes_images: includeImages
+  };
+  Object.entries(ALL_STORAGE_KEYS).forEach(([name, key])=>{
+    if(name === 'images' && !includeImages) return;
+    const raw = localStorage.getItem(key);
+    if(raw){
+      try{ payload[name] = JSON.parse(raw); }
+      catch(e){ payload[name] = raw; }
+    }
+  });
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const ts = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+  a.href = url;
+  a.download = `presentation_settings_${ts}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 1500);
+}
+
+function importSettings(data){
+  if(!data || data._format !== 'soha-ppt-settings'){
+    alert('올바른 설정 파일이 아닙니다. (형식 확인 실패)');
+    return;
+  }
+  const imageCount = data.images ? Object.keys(data.images).length : 0;
+  const willReplaceImages = data._includes_images && imageCount > 0;
+  const msg = `설정을 불러오면 현재 편집 내용이 모두 덮어쓰기 됩니다.\n\n` +
+              `• 텍스트 수정: ${data.texts ? Object.keys(data.texts).length+'개' : '없음'}\n` +
+              `• 리스트 항목: ${data.lists ? Object.keys(data.lists).length+'개 리스트' : '없음'}\n` +
+              `• 클릭 공개: ${data.reveals ? Object.keys(data.reveals).length+'개' : '없음'}\n` +
+              `• 테마: ${data.theme && Object.keys(data.theme).length ? '사용자 정의' : '기본'}\n` +
+              `• 레이아웃: ${data.layout && Object.keys(data.layout).length ? '사용자 정의' : '기본'}\n` +
+              `• 스티커: ${data.stickers ? Object.keys(data.stickers).length+'개' : '없음'}\n` +
+              `• 이미지: ${willReplaceImages ? imageCount+'개 포함' : '파일에 미포함 (현재 이미지 유지)'}\n\n` +
+              `계속할까요?`;
+  if(!confirm(msg)) return;
+
+  // 각 키 덮어쓰기 (images는 _includes_images가 true일 때만)
+  Object.entries(ALL_STORAGE_KEYS).forEach(([name, key])=>{
+    if(name === 'images' && !data._includes_images) return; // 이미지 보존
+    if(data[name] !== undefined){
+      try{ localStorage.setItem(key, JSON.stringify(data[name])); }
+      catch(e){ console.warn(`${name} 저장 실패:`, e); }
+    }else{
+      localStorage.removeItem(key);
+    }
+  });
+
+  // 페이지 새로고침으로 깔끔하게 모든 상태 재적용
+  // (부분 적용보다 훨씬 안정적 - reveal 핸들러·리스트 렌더·도넛·스티커 override 등 복잡 연쇄)
+  location.reload();
+}
+
+document.getElementById('exportSettingsBtn').addEventListener('click', exportSettings);
+document.getElementById('resetAllSettingsBtn').addEventListener('click', ()=>{
+  const confirmMsg = '⚠️ 모든 편집 내용을 초기화합니다.\n\n' +
+    '• 업로드한 이미지\n' +
+    '• 수정한 텍스트\n' +
+    '• 추가/삭제한 리스트 항목\n' +
+    '• 클릭 공개 설정\n' +
+    '• 체크 가능 설정\n' +
+    '• 테마 색상\n' +
+    '• 레이아웃 간격\n' +
+    '• 편집한 스티커\n\n' +
+    '모두 기본값으로 돌아갑니다. 계속할까요?\n\n' +
+    '💡 복구가 필요할 수 있다면 먼저 "💾 내보내기"로 백업을 만드세요.';
+  if(!confirm(confirmMsg)) return;
+  Object.values(ALL_STORAGE_KEYS).forEach(key=>localStorage.removeItem(key));
+  // 패널 열림 상태와 투명도는 유지
+  localStorage.removeItem('soha-ppt-image-panel-open-v1');
+  location.reload();
+});
+
+/* ============================================
+   패널 투명도 슬라이더
+============================================ */
+const PANEL_OPACITY_KEY = 'soha-ppt-panel-opacity-v1';
+function applyPanelOpacity(pct){
+  const alpha = (pct/100).toFixed(3);
+  document.documentElement.style.setProperty('--panel-bg-alpha', alpha);
+  const label = document.getElementById('panelOpacityValue');
+  if(label) label.textContent = pct + '%';
+}
+(function initOpacitySlider(){
+  const slider = document.getElementById('panelOpacitySlider');
+  if(!slider) return;
+  const stored = parseInt(localStorage.getItem(PANEL_OPACITY_KEY) || '93', 10);
+  const val = (Number.isFinite(stored) && stored >= 30 && stored <= 100) ? stored : 93;
+  slider.value = val;
+  applyPanelOpacity(val);
+  slider.addEventListener('input', ()=>{
+    const v = parseInt(slider.value, 10);
+    applyPanelOpacity(v);
+    try{ localStorage.setItem(PANEL_OPACITY_KEY, String(v)); }catch(e){}
+  });
+})();
+document.getElementById('importSettingsBtn').addEventListener('click', ()=>{
+  document.getElementById('importSettingsInput').click();
+});
+document.getElementById('importSettingsInput').addEventListener('change', (e)=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const data = JSON.parse(reader.result);
+      importSettings(data);
+    }catch(err){
+      alert('JSON 파싱 실패: ' + err.message);
+    }
+  };
+  reader.onerror = ()=>alert('파일 읽기 실패');
+  reader.readAsText(file);
+  // 같은 파일 재선택 가능하도록 input 초기화
+  e.target.value = '';
+});
+
+/* ============================================
+   초기화: 저장된 상태 모두 적용 + UI 생성
+============================================ */
+/* ============================================
+   슬라이드 관리 (순서 변경 / 복사 / 삭제 / 추가)
+============================================ */
+// (SLIDE_LAYOUT_STORAGE_KEY는 ALL_STORAGE_KEYS 정의 위에 미리 선언됨 - TDZ 회피)
+
+// 새 슬라이드 ID 생성
+let slideIdCounter = 0;
+function newSlideId(){
+  slideIdCounter++;
+  return `s_dup_${Date.now().toString(36)}_${slideIdCounter}`;
+}
+
+// localStorage에서 슬라이드 순서 + 추가/복사된 슬라이드 정의 복원
+let slideLayoutState = (()=>{
+  try{ return JSON.parse(localStorage.getItem(SLIDE_LAYOUT_STORAGE_KEY)||'{}'); }
+  catch(e){ return {}; }
+})();
+function saveSlideLayoutState(){
+  try{ localStorage.setItem(SLIDE_LAYOUT_STORAGE_KEY, JSON.stringify(slideLayoutState)); }
+  catch(e){ console.warn(e); }
+}
+
+// 한 슬라이드의 모든 슬라이드별 데이터(텍스트/리스트/reveal/스티커)를 새 ID로 복제
+function cloneSlideData(sourceSlideId, newSlideId){
+  let changed = false;
+
+  // 텍스트 override: "<sid>:<slot>" 키들
+  Object.keys(textOverrides).forEach(k=>{
+    if(k.startsWith(sourceSlideId + ':')){
+      const newKey = newSlideId + k.slice(sourceSlideId.length);
+      if(!(newKey in textOverrides)){
+        textOverrides[newKey] = textOverrides[k];
+        changed = true;
+      }
+    }
+  });
+  if(changed){ saveTextOverrides(); changed = false; }
+
+  // textDefaults도 복제 (캡처된 기본값)
+  Object.keys(textDefaults).forEach(k=>{
+    if(k.startsWith(sourceSlideId + ':')){
+      const newKey = newSlideId + k.slice(sourceSlideId.length);
+      if(!(newKey in textDefaults)){
+        textDefaults[newKey] = textDefaults[k];
+      }
+    }
+  });
+
+  // 리스트 state: "<defId>:<sid>"
+  Object.keys(listState).forEach(k=>{
+    if(k.endsWith(':' + sourceSlideId)){
+      const newKey = k.slice(0, k.length - sourceSlideId.length) + newSlideId;
+      if(!(newKey in listState)){
+        listState[newKey] = JSON.parse(JSON.stringify(listState[k])); // deep clone
+        changed = true;
+      }
+    }
+  });
+  if(changed){ saveListState(); changed = false; }
+  // listInitial도 복제
+  Object.keys(listInitial).forEach(k=>{
+    if(k.endsWith(':' + sourceSlideId)){
+      const newKey = k.slice(0, k.length - sourceSlideId.length) + newSlideId;
+      if(!(newKey in listInitial)){
+        listInitial[newKey] = JSON.parse(JSON.stringify(listInitial[k]));
+      }
+    }
+  });
+
+  // reveal state: "<sid>:<slot>"
+  Object.keys(revealState).forEach(k=>{
+    if(k.startsWith(sourceSlideId + ':')){
+      const newKey = newSlideId + k.slice(sourceSlideId.length);
+      if(!(newKey in revealState)){
+        revealState[newKey] = revealState[k];
+        changed = true;
+      }
+    }
+  });
+  if(changed){ saveRevealState(); changed = false; }
+
+  // 스티커 override: "<sid>-<...>"
+  Object.keys(stickerOverrides).forEach(k=>{
+    if(k.startsWith(sourceSlideId + '-')){
+      const newKey = newSlideId + k.slice(sourceSlideId.length);
+      if(!(newKey in stickerOverrides)){
+        stickerOverrides[newKey] = stickerOverrides[k];
+        changed = true;
+      }
+    }
+  });
+  if(changed) saveStickerOverrides();
+}
+
+// === DOM 조작 함수들 ===
+function moveSlide(slideId, direction){
+  // direction: -1 (위) 또는 +1 (아래)
+  const el = getSlideById(slideId);
+  if(!el) return;
+  const idx = slideOrder.indexOf(slideId);
+  const newIdx = idx + direction;
+  if(newIdx < 0 || newIdx >= slideOrder.length) return;
+  const sibling = getSlideById(slideOrder[newIdx]);
+  if(!sibling) return;
+  const parent = el.parentNode;
+  if(direction === -1){
+    parent.insertBefore(el, sibling);
+  }else{
+    parent.insertBefore(el, sibling.nextSibling);
+  }
+  afterSlideStructureChange();
+}
+
+function deleteSlide(slideId){
+  if(slideOrder.length <= 1){
+    alert('마지막 슬라이드는 삭제할 수 없습니다.');
+    return;
+  }
+  const el = getSlideById(slideId);
+  if(!el) return;
+  if(!confirm(`이 슬라이드를 삭제하시겠습니까?\n\n이 슬라이드의 텍스트·리스트·공개·스티커 편집 내용도 함께 제거됩니다.`)) return;
+  el.remove();
+  // 모든 슬라이드별 데이터 정리
+  let changed;
+  changed = false;
+  Object.keys(textOverrides).forEach(k=>{
+    if(k.startsWith(slideId + ':')){ delete textOverrides[k]; changed = true; }
+  });
+  if(changed) saveTextOverrides();
+  changed = false;
+  Object.keys(listState).forEach(k=>{
+    if(k.endsWith(':' + slideId)){ delete listState[k]; changed = true; }
+  });
+  if(changed) saveListState();
+  changed = false;
+  Object.keys(revealState).forEach(k=>{
+    if(k.startsWith(slideId + ':')){ delete revealState[k]; changed = true; }
+  });
+  if(changed) saveRevealState();
+  changed = false;
+  Object.keys(stickerOverrides).forEach(k=>{
+    if(k.startsWith(slideId + '-')){ delete stickerOverrides[k]; changed = true; }
+  });
+  if(changed) saveStickerOverrides();
+  // textDefaults도 정리 (메모리)
+  Object.keys(textDefaults).forEach(k=>{
+    if(k.startsWith(slideId + ':')) delete textDefaults[k];
+  });
+  Object.keys(listInitial).forEach(k=>{
+    if(k.endsWith(':' + slideId)) delete listInitial[k];
+  });
+  // extras에서도 제거
+  if(slideLayoutState.extras && slideLayoutState.extras[slideId]){
+    delete slideLayoutState.extras[slideId];
+    saveSlideLayoutState();
+  }
+  afterSlideStructureChange();
+  if(cur >= getTot()) cur = getTot() - 1;
+  if(cur < 0) cur = 0;
+  goTo(cur);
+}
+
+function duplicateSlide(sourceSlideId){
+  const sourceEl = getSlideById(sourceSlideId);
+  if(!sourceEl) return;
+  const clone = sourceEl.cloneNode(true);
+  const newId = newSlideId();
+  clone.dataset.slideId = newId;
+  clone.classList.remove('act');
+  // 복사된 슬라이드 안의 input file 등 ID 충돌 방지
+  // (image-slot-input-XXX 같은 id가 있을 수 있으나 실제로 image input은 슬라이드 외부에 있음)
+  // 원본 다음에 삽입
+  if(sourceEl.nextSibling){
+    sourceEl.parentNode.insertBefore(clone, sourceEl.nextSibling);
+  }else{
+    sourceEl.parentNode.appendChild(clone);
+  }
+  // 데이터 복제
+  cloneSlideData(sourceSlideId, newId);
+  // extras에 등록 (재로드 시 복원용)
+  if(!slideLayoutState.extras) slideLayoutState.extras = {};
+  slideLayoutState.extras[newId] = {
+    kind: clone.dataset.slideKind,
+    sourceId: sourceSlideId
+  };
+  saveSlideLayoutState();
+  afterSlideStructureChange();
+}
+
+// 새 슬라이드를 원본 ID에서 복제해서 맨 뒤에 추가
+function addSlideOfKind(kind){
+  const sourceId = ORIGINAL_SLIDE_IDS[kind];
+  if(!sourceId) return;
+  // 원본이 DOM에 없을 수도 있음(삭제됨). 그럼 다른 같은 kind 슬라이드 사용
+  let sourceEl = getSlideById(sourceId);
+  if(!sourceEl){
+    sourceEl = document.querySelector(`.sl[data-slide-kind="${kind}"]`);
+  }
+  if(!sourceEl){
+    alert(`'${kindTitles[kind]||kind}' 종류의 원본 슬라이드를 찾을 수 없습니다.`);
+    return;
+  }
+  duplicateSlide(sourceEl.dataset.slideId);
+}
+
+// 슬라이드 구조 변경 후 공통 후처리
+function afterSlideStructureChange(){
+  reassignSlideIndices();      // data-idx + slideOrder 갱신
+  rebuildNavDots();            // 하단 점 재생성
+  // 새로 생긴 슬라이드(복사/추가)의 textDefaults도 캡처
+  captureTextDefaults();
+  // 모든 빌더/렌더 재호출
+  buildImageManager();
+  applyStoredImages();
+  applyStoredTexts();          // 저장된 텍스트 override 다시 적용 (복사된 슬라이드에도)
+  buildTextEditor();
+  buildLayoutEditor();
+  buildStickerEditor();
+  applyStoredStickers();
+  applyStoredReveals();
+  renderAllLists();
+  updateDonut();
+  buildSlidesManager();
+  // slideOrder를 localStorage에 저장
+  slideLayoutState.order = slideOrder.slice();
+  saveSlideLayoutState();
+  // 페이지 표시 갱신
+  const pn = document.getElementById('pn');
+  if(pn) pn.textContent = (cur+1)+' / '+getTot();
+}
+
+// === 슬라이드 관리 UI 빌더 ===
+function buildSlidesManager(){
+  const list = document.getElementById('slidesList');
+  if(!list) return;
+  list.innerHTML = '';
+  slideOrder.forEach((sid, idx)=>{
+    const kind = getSlideKind(sid);
+    const sameKindIds = slideOrder.filter(s => getSlideKind(s) === kind);
+    const dupIdx = sameKindIds.indexOf(sid);
+    const suffix = sameKindIds.length > 1 ? ` #${dupIdx+1}` : '';
+    const title = (kindTitles[kind] || kind) + suffix;
+    const isCurrent = idx === cur;
+    const isFirst = idx === 0;
+    const isLast = idx === slideOrder.length - 1;
+    const isOnly = slideOrder.length === 1;
+
+    const row = document.createElement('div');
+    row.className = 'slide-row' + (isCurrent ? ' current' : '');
+    row.innerHTML = `
+      <div class="slide-row-num">${idx+1}</div>
+      <div class="slide-row-info">
+        <div class="slide-row-title">${title}</div>
+        <div class="slide-row-kind">${kind}</div>
+      </div>
+      <div class="slide-row-actions">
+        <button type="button" class="slide-row-btn move-up" title="위로" ${isFirst ? 'disabled' : ''}>↑</button>
+        <button type="button" class="slide-row-btn move-down" title="아래로" ${isLast ? 'disabled' : ''}>↓</button>
+        <button type="button" class="slide-row-btn duplicate" title="복사 (이 종류의 새 슬라이드 추가)">📋</button>
+        <button type="button" class="slide-row-btn danger delete" title="삭제" ${isOnly ? 'disabled' : ''}>×</button>
+      </div>
+    `;
+    // 정보 클릭 시 해당 슬라이드로 이동
+    row.querySelector('.slide-row-info').addEventListener('click', ()=>{
+      goTo(idx);
+      buildSlidesManager();  // 'current' 스타일 갱신
+    });
+    row.querySelector('.move-up').addEventListener('click', ()=>moveSlide(sid, -1));
+    row.querySelector('.move-down').addEventListener('click', ()=>moveSlide(sid, +1));
+    row.querySelector('.duplicate').addEventListener('click', ()=>duplicateSlide(sid));
+    row.querySelector('.delete').addEventListener('click', ()=>deleteSlide(sid));
+    list.appendChild(row);
+  });
+  // 추가 셀렉트 채우기 (한 번만)
+  const sel = document.getElementById('slidesAddKind');
+  if(sel && sel.options.length === 0){
+    Object.entries(kindTitles).forEach(([k, label])=>{
+      const opt = document.createElement('option');
+      opt.value = k;
+      opt.textContent = label;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+// 추가 버튼 핸들러
+(function(){
+  const btn = document.getElementById('slidesAddBtn');
+  if(!btn) return;
+  btn.addEventListener('click', ()=>{
+    const sel = document.getElementById('slidesAddKind');
+    if(sel) addSlideOfKind(sel.value);
+  });
+})();
+
+// 페이지 이동 시 슬라이드 매니저 'current' 스타일 갱신
+const _origGoTo = goTo;
+goTo = function(i){
+  _origGoTo(i);
+  const list = document.getElementById('slidesList');
+  if(list){
+    Array.from(list.children).forEach((row, idx)=>{
+      row.classList.toggle('current', idx === cur);
+      const num = row.querySelector('.slide-row-num');
+      // 번호는 그대로지만 current 스타일 갱신됨
+    });
+  }
+};
+
+// === 초기 복원: localStorage에 저장된 슬라이드 구조 적용 ===
+function restoreSlideLayout(){
+  if(!slideLayoutState || !slideLayoutState.order){
+    return;
+  }
+  try{
+    // 1. extras(복사된 슬라이드)부터 생성
+    if(slideLayoutState.extras){
+      Object.entries(slideLayoutState.extras).forEach(([newId, info])=>{
+        if(!info || !info.kind) return; // 잔재 데이터 무시
+        if(getSlideById(newId)) return; // 이미 있음
+        const sourceEl = (info.sourceId && getSlideById(info.sourceId)) ||
+                         document.querySelector(`.sl[data-slide-kind="${info.kind}"]`);
+        if(!sourceEl){
+          console.warn(`[restoreSlideLayout] extras의 ${newId}(kind=${info.kind}) 원본을 찾지 못함, 건너뜀`);
+          return;
+        }
+        const clone = sourceEl.cloneNode(true);
+        clone.dataset.slideId = newId;
+        clone.classList.remove('act');
+        sourceEl.parentNode.appendChild(clone);
+        // 데이터도 복제 (잔재 텍스트/리스트가 새 ID에 없을 수 있으므로)
+        cloneSlideData(sourceEl.dataset.slideId, newId);
+      });
+    }
+    // 2. slideOrder를 따라 DOM 재배치 + 삭제된 슬라이드 처리
+    const desiredOrder = slideLayoutState.order.filter(id => getSlideById(id));
+    if(desiredOrder.length === 0){
+      console.warn('[restoreSlideLayout] 저장된 order에 유효 슬라이드가 없음, 무시');
+      return;
+    }
+    const currentSlides = Array.from(document.querySelectorAll('.sl'));
+    currentSlides.forEach(el=>{
+      if(!desiredOrder.includes(el.dataset.slideId)){
+        el.remove();
+      }
+    });
+    if(desiredOrder.length > 0){
+      const firstEl = getSlideById(desiredOrder[0]);
+      if(firstEl){
+        const parent = firstEl.parentNode;
+        desiredOrder.forEach(id=>{
+          const el = getSlideById(id);
+          if(el) parent.appendChild(el);
+        });
+      }
+    }
+    reassignSlideIndices();
+    rebuildNavDots();
+  }catch(e){
+    // 잔재 데이터로 인한 오류는 무시하고 기본 상태로
+    console.error('[restoreSlideLayout] 복원 실패, 기본 구조 유지:', e);
+    slideLayoutState = {};
+    saveSlideLayoutState();
+  }
+}
+
+
+// 각 빌더를 안전하게 호출 (한 단계 실패가 나머지를 막지 않게)
+function _safeRun(name, fn){
+  try{ fn(); }
+  catch(e){ console.error(`[init/${name}] 실패:`, e); }
+}
+_safeRun('restoreSlideLayout', restoreSlideLayout);
+_safeRun('captureTextDefaults_again', captureTextDefaults);  // 복사 슬라이드의 textDefaults도 캡처
+_safeRun('captureAllInitialLists', captureAllInitialLists);
+_safeRun('applyStoredTheme', applyStoredTheme);
+_safeRun('applyStoredLayout', applyStoredLayout);
+_safeRun('applyStoredTexts', applyStoredTexts);
+_safeRun('renderAllLists', renderAllLists);
+_safeRun('applyStoredReveals', applyStoredReveals);
+_safeRun('updateDonut', updateDonut);
+_safeRun('buildTextEditor', buildTextEditor);
+_safeRun('buildThemeEditor', buildThemeEditor);
+_safeRun('buildLayoutEditor', buildLayoutEditor);
+_safeRun('buildStickerEditor', buildStickerEditor);
+_safeRun('applyStoredStickers', applyStoredStickers);
+_safeRun('buildSlidesManager', buildSlidesManager);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script>
+function fitStage(){
+  const w=window.innerWidth, h=window.innerHeight;
+  const scale=Math.min(w/1920,h/1080);
+  const pres=document.getElementById('pres');
+  pres.style.transform=`scale(${scale})`;
+}
+window.addEventListener('resize', fitStage);
+window.addEventListener('load', ()=>setTimeout(fitStage, 30));
+
+function fileNameForSlide(i){
+  const labels=['cover','profile','like-dislike','good-bad','contents','goals','qna','thanks'];
+  return `soha_${String(i+1).padStart(2,'0')}_${labels[i]||'slide'}.png`;
+}
+function toggleUi(){document.body.classList.toggle('exporting');}
+async function ensureFonts(){
+  if(document.fonts && document.fonts.ready){try{await document.fonts.ready;}catch(e){}}
+  await new Promise(r=>setTimeout(r, 300));
+}
+async function captureSlide(index){
+  const prev=cur;
+  goTo(index);
+  await ensureFonts();
+  document.body.classList.add('exporting');
+  const node=document.querySelector(`.sl[data-idx="${index}"]`);
+  const dataUrl=await htmlToImage.toPng(node,{cacheBust:true,pixelRatio:1,width:1920,height:1080});
+  document.body.classList.remove('exporting');
+  if(prev!==index)goTo(prev);
+  return dataUrl;
+}
+function triggerDownload(dataUrl, filename){
+  const a=document.createElement('a');
+  a.href=dataUrl;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+}
+async function downloadCurrentSlide(){
+  const dataUrl=await captureSlide(cur); triggerDownload(dataUrl, fileNameForSlide(cur));
+}
+async function downloadAllSlides(){
+  const tot = getTot();
+  for(let i=0;i<tot;i++){
+    const dataUrl=await captureSlide(i);
+    triggerDownload(dataUrl, fileNameForSlide(i));
+    await new Promise(r=>setTimeout(r, 250));
+  }
+}
+</script>
+
+
+</body>
+</html>
